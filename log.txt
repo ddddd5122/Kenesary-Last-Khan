@@ -1,36 +1,36 @@
-Sat Feb 28 11:14:33 2026
+Sat Feb 28 15:01:24 2026
 Windows-10-10.0.26100
 Ren'Py 7.4.11.2266
  
 
-Bootstrap to the start of init.init took 0.07s
-Early init took 0.00s
+Bootstrap to the start of init.init took 0.08s
+Early init took 0.01s
 Loader init took 0.01s
-Loading error handling took 0.02s
-Loading script took 0.21s
+Loading error handling took 0.01s
+Loading script took 0.17s
 Loading save slot metadata. took 0.01s
 Loading persistent took 0.00s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.04s
+Running init code took 0.03s
 Loading analysis data took 0.01s
 Analyze and compile ATL took 0.00s
 Index archives took 0.00s
 Backing up script files to 'C:\\Users\\tuyak\\AppData\\Roaming/RenPy/backups\\visual novella':
-Dump and make backups. took 0.01s
+Dump and make backups. took 0.00s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
 Initial gc. took 0.02s
 DPI scale factor: 1.250000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.40s
+Creating interface object took 0.35s
 Cleaning stores took 0.00s
 Init translation took 0.02s
 Build styles took 0.00s
 Load screen analysis took 0.00s
 Analyze screens took 0.01s
 Save screen analysis took 0.02s
-Prepare screens took 0.03s
+Prepare screens took 0.04s
 Save pyanalysis. took 0.00s
 Save bytecode. took 0.02s
 Running _start took 0.00s
@@ -47,17 +47,10 @@ Version: '4.6.0 NVIDIA 591.86'
 Display Info: None
 Screen sizes: virtual=(1280, 720) physical=(1733, 975) drawable=(1733, 975)
 Maximum texture size: 4096x4096
-Cleaning stores took 0.00s
-Init translation took 0.00s
-Build styles took 0.00s
-Load screen analysis took 0.01s
-Analyze screens took 0.00s
-Prepare screens took 0.00s
-Running _start took 0.00s
 
 Full traceback:
-  File "game/script.rpy", line 38, in script
-    "{cps=25}Абылай атамыз да дәл осылай тұрған еді.{/cps}"
+  File "game/script.rpy", line 321, in script
+    voice "<from 2.263 to 12.544>voices/kh-14.mp3"
   File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
     renpy.exports.say(who, what, *args, **kwargs)
   File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
@@ -89,8 +82,8 @@ Full traceback:
 AttributeError: 'Layout' object has no attribute 'yesno_prompt'
 
 While running game code:
-  File "game/script.rpy", line 38, in script
-    "{cps=25}Абылай атамыз да дәл осылай тұрған еді.{/cps}"
+  File "game/script.rpy", line 321, in script
+    voice "<from 2.263 to 12.544>voices/kh-14.mp3"
   File "renpy/common/00action_menu.rpy", line 220, in __call__
     layout.yesno_screen(layout.QUIT, Quit(False))
   File "renpy/common/00layout.rpy", line 527, in yesno_screen
@@ -99,499 +92,39 @@ While running game code:
     rv = layout.yesno_prompt(*args)
 AttributeError: 'Layout' object has no attribute 'yesno_prompt'
 Resetting cache.
-Bootstrap to the start of init.init took 414.44s
-Early init took 0.00s
-Loader init took 0.02s
-Loading error handling took 0.01s
-Loading script took 0.11s
-Loading save slot metadata. took 0.01s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.02s
-Loading analysis data took 0.02s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Backing up script files to 'C:\\Users\\tuyak\\AppData\\Roaming/RenPy/backups\\visual novella':
-Dump and make backups. took 0.00s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.03s
-DPI scale factor: 1.250000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.37s
-Cleaning stores took 0.00s
-Init translation took 0.02s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.02s
-Prepare screens took 0.04s
-Save pyanalysis. took 0.02s
-Save bytecode. took 0.01s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.04s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce GTX 1660 Ti with Max-Q Design/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 591.86'
-Display Info: None
-Screen sizes: virtual=(1280, 720) physical=(1733, 975) drawable=(1733, 975)
-Maximum texture size: 4096x4096
-
-Full traceback:
-  File "game/script.rpy", line 260, in script
-    "{cps=25}Ақмола бекінісінен шыққан үш жүз атты әскер... екі зеңбірегі бар.{/cps}"
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
-    who(what, *args, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
-    **display_args)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
-    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 4035, in interact_core
-    self.quit_event()
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 2977, in quit_event
-    renpy.display.behavior.run(renpy.config.quit_action)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/behavior.py", line 330, in run
-    return action(*args, **kwargs)
-  File "renpy/common/00action_menu.rpy", line 220, in __call__
-    layout.yesno_screen(layout.QUIT, Quit(False))
-  File "renpy/common/00layout.rpy", line 527, in yesno_screen
-    if renpy.invoke_in_new_context(layout.invoke_yesno_prompt, None, message):
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/game.py", line 284, in invoke_in_new_context
-    return callable(*args, **kwargs)
-  File "renpy/common/00layout.rpy", line 472, in invoke_yesno_prompt
-    rv = layout.yesno_prompt(*args)
-AttributeError: 'Layout' object has no attribute 'yesno_prompt'
-
-While running game code:
-  File "game/script.rpy", line 260, in script
-    "{cps=25}Ақмола бекінісінен шыққан үш жүз атты әскер... екі зеңбірегі бар.{/cps}"
-  File "renpy/common/00action_menu.rpy", line 220, in __call__
-    layout.yesno_screen(layout.QUIT, Quit(False))
-  File "renpy/common/00layout.rpy", line 527, in yesno_screen
-    if renpy.invoke_in_new_context(layout.invoke_yesno_prompt, None, message):
-  File "renpy/common/00layout.rpy", line 472, in invoke_yesno_prompt
-    rv = layout.yesno_prompt(*args)
-AttributeError: 'Layout' object has no attribute 'yesno_prompt'
-Resetting cache.
-Bootstrap to the start of init.init took 536.34s
+Bootstrap to the start of init.init took 153.96s
 Early init took 0.00s
 Loader init took 0.01s
-Loading error handling took 0.01s
-Loading script took 0.11s
-Loading save slot metadata. took 0.01s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.02s
-Loading analysis data took 0.02s
-Analyze and compile ATL took 0.01s
-Index archives took 0.00s
-Backing up script files to 'C:\\Users\\tuyak\\AppData\\Roaming/RenPy/backups\\visual novella':
-Dump and make backups. took 0.00s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.03s
-DPI scale factor: 1.250000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.39s
-Cleaning stores took 0.00s
-Init translation took 0.02s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.02s
-Prepare screens took 0.04s
-Save pyanalysis. took 0.02s
-Save bytecode. took 0.01s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.05s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce GTX 1660 Ti with Max-Q Design/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 591.86'
-Display Info: None
-Screen sizes: virtual=(1280, 720) physical=(1733, 975) drawable=(1733, 975)
-Maximum texture size: 4096x4096
-Cleaning stores took 0.00s
-Init translation took 0.00s
-Build styles took 0.00s
-Load screen analysis took 0.01s
-Analyze screens took 0.00s
-Prepare screens took 0.00s
-Running _start took 0.00s
-
-Full traceback:
-  File "game/script.rpy", line 30, in script
-    "..."
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
-    who(what, *args, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
-    **display_args)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
-    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 4035, in interact_core
-    self.quit_event()
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 2977, in quit_event
-    renpy.display.behavior.run(renpy.config.quit_action)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/behavior.py", line 330, in run
-    return action(*args, **kwargs)
-  File "renpy/common/00action_menu.rpy", line 220, in __call__
-    layout.yesno_screen(layout.QUIT, Quit(False))
-  File "renpy/common/00layout.rpy", line 527, in yesno_screen
-    if renpy.invoke_in_new_context(layout.invoke_yesno_prompt, None, message):
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/game.py", line 284, in invoke_in_new_context
-    return callable(*args, **kwargs)
-  File "renpy/common/00layout.rpy", line 472, in invoke_yesno_prompt
-    rv = layout.yesno_prompt(*args)
-AttributeError: 'Layout' object has no attribute 'yesno_prompt'
-
-While running game code:
-  File "game/script.rpy", line 30, in script
-    "..."
-  File "renpy/common/00action_menu.rpy", line 220, in __call__
-    layout.yesno_screen(layout.QUIT, Quit(False))
-  File "renpy/common/00layout.rpy", line 527, in yesno_screen
-    if renpy.invoke_in_new_context(layout.invoke_yesno_prompt, None, message):
-  File "renpy/common/00layout.rpy", line 472, in invoke_yesno_prompt
-    rv = layout.yesno_prompt(*args)
-AttributeError: 'Layout' object has no attribute 'yesno_prompt'
-Resetting cache.
-Bootstrap to the start of init.init took 547.26s
-Early init took 0.00s
-Loader init took 0.01s
-Loading error handling took 0.01s
-Loading script took 0.09s
-Loading save slot metadata. took 0.01s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.02s
-Loading analysis data took 0.02s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Dump and make backups. took 0.00s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.03s
-DPI scale factor: 1.250000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.36s
-Cleaning stores took 0.00s
-Init translation took 0.02s
-Build styles took 0.00s
-Load screen analysis took 0.01s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
-Prepare screens took 0.04s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.04s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce GTX 1660 Ti with Max-Q Design/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 591.86'
-Display Info: None
-Screen sizes: virtual=(1280, 720) physical=(1733, 975) drawable=(1733, 975)
-Maximum texture size: 4096x4096
-
-Full traceback:
-  File "game/script.rpy", line 182, in script
-    "{cps=25}Хан ием... Елың сены ақ киызге көтергеныне дән риза, бұл орын саған ата қаныңмен бұйырған.{/cps}"
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
-    who(what, *args, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
-    **display_args)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
-    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 4035, in interact_core
-    self.quit_event()
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 2977, in quit_event
-    renpy.display.behavior.run(renpy.config.quit_action)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/behavior.py", line 330, in run
-    return action(*args, **kwargs)
-  File "renpy/common/00action_menu.rpy", line 220, in __call__
-    layout.yesno_screen(layout.QUIT, Quit(False))
-  File "renpy/common/00layout.rpy", line 527, in yesno_screen
-    if renpy.invoke_in_new_context(layout.invoke_yesno_prompt, None, message):
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/game.py", line 284, in invoke_in_new_context
-    return callable(*args, **kwargs)
-  File "renpy/common/00layout.rpy", line 472, in invoke_yesno_prompt
-    rv = layout.yesno_prompt(*args)
-AttributeError: 'Layout' object has no attribute 'yesno_prompt'
-
-While running game code:
-  File "game/script.rpy", line 182, in script
-    "{cps=25}Хан ием... Елың сены ақ киызге көтергеныне дән риза, бұл орын саған ата қаныңмен бұйырған.{/cps}"
-  File "renpy/common/00action_menu.rpy", line 220, in __call__
-    layout.yesno_screen(layout.QUIT, Quit(False))
-  File "renpy/common/00layout.rpy", line 527, in yesno_screen
-    if renpy.invoke_in_new_context(layout.invoke_yesno_prompt, None, message):
-  File "renpy/common/00layout.rpy", line 472, in invoke_yesno_prompt
-    rv = layout.yesno_prompt(*args)
-AttributeError: 'Layout' object has no attribute 'yesno_prompt'
-Resetting cache.
-Bootstrap to the start of init.init took 586.93s
-Early init took 0.00s
-Loader init took 0.02s
 Loading error handling took 0.02s
-Loading script took 0.10s
-Loading save slot metadata. took 0.01s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.02s
-Loading analysis data took 0.03s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Backing up script files to 'C:\\Users\\tuyak\\AppData\\Roaming/RenPy/backups\\visual novella':
-Dump and make backups. took 0.00s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.03s
-DPI scale factor: 1.250000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.36s
-Cleaning stores took 0.00s
-Init translation took 0.02s
-Build styles took 0.00s
-Load screen analysis took 0.01s
-Analyze screens took 0.01s
-Save screen analysis took 0.02s
-Prepare screens took 0.04s
-Save pyanalysis. took 0.02s
-Save bytecode. took 0.01s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.04s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce GTX 1660 Ti with Max-Q Design/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 591.86'
-Display Info: None
-Screen sizes: virtual=(1280, 720) physical=(1733, 975) drawable=(1733, 975)
-Maximum texture size: 4096x4096
-Cleaning stores took 0.00s
-Init translation took 0.00s
-Build styles took 0.00s
-Load screen analysis took 0.01s
-Analyze screens took 0.00s
-Prepare screens took 0.00s
-Running _start took 0.00s
-Cleaning stores took 0.00s
-Init translation took 0.00s
-Build styles took 0.00s
-Load screen analysis took 0.01s
-Analyze screens took 0.00s
-Prepare screens took 0.00s
-Running _start took 0.00s
-
-Full traceback:
-  File "game/script.rpy", line 30, in script
-    "..."
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
-    who(what, *args, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
-    **display_args)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
-    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 4035, in interact_core
-    self.quit_event()
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 2977, in quit_event
-    renpy.display.behavior.run(renpy.config.quit_action)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/behavior.py", line 330, in run
-    return action(*args, **kwargs)
-  File "renpy/common/00action_menu.rpy", line 220, in __call__
-    layout.yesno_screen(layout.QUIT, Quit(False))
-  File "renpy/common/00layout.rpy", line 527, in yesno_screen
-    if renpy.invoke_in_new_context(layout.invoke_yesno_prompt, None, message):
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/game.py", line 284, in invoke_in_new_context
-    return callable(*args, **kwargs)
-  File "renpy/common/00layout.rpy", line 472, in invoke_yesno_prompt
-    rv = layout.yesno_prompt(*args)
-AttributeError: 'Layout' object has no attribute 'yesno_prompt'
-
-While running game code:
-  File "game/script.rpy", line 30, in script
-    "..."
-  File "renpy/common/00action_menu.rpy", line 220, in __call__
-    layout.yesno_screen(layout.QUIT, Quit(False))
-  File "renpy/common/00layout.rpy", line 527, in yesno_screen
-    if renpy.invoke_in_new_context(layout.invoke_yesno_prompt, None, message):
-  File "renpy/common/00layout.rpy", line 472, in invoke_yesno_prompt
-    rv = layout.yesno_prompt(*args)
-AttributeError: 'Layout' object has no attribute 'yesno_prompt'
-Resetting cache.
-Bootstrap to the start of init.init took 695.00s
-Early init took 0.00s
-Loader init took 0.04s
-Loading error handling took 0.03s
-Loading script took 0.20s
+Loading script took 0.18s
 Loading save slot metadata. took 0.02s
 Loading persistent took 0.00s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.04s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.01s
-Index archives took 0.00s
-Dump and make backups. took 0.00s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.07s
-DPI scale factor: 1.250000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.89s
-Cleaning stores took 0.00s
-Init translation took 0.04s
-Build styles took 0.00s
-Load screen analysis took 0.02s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.10s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce GTX 1660 Ti with Max-Q Design/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 591.86'
-Display Info: None
-Screen sizes: virtual=(1280, 720) physical=(1733, 975) drawable=(1733, 975)
-Maximum texture size: 4096x4096
-
-Full traceback:
-  File "game/script.rpy", line 193, in script
-    menu:
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/ast.py", line 1688, in execute
-    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/exports.py", line 1060, in menu
-    rv = renpy.store.menu(new_items)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/exports.py", line 1296, in display_menu
-    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 4035, in interact_core
-    self.quit_event()
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 2977, in quit_event
-    renpy.display.behavior.run(renpy.config.quit_action)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/behavior.py", line 330, in run
-    return action(*args, **kwargs)
-  File "renpy/common/00action_menu.rpy", line 220, in __call__
-    layout.yesno_screen(layout.QUIT, Quit(False))
-  File "renpy/common/00layout.rpy", line 527, in yesno_screen
-    if renpy.invoke_in_new_context(layout.invoke_yesno_prompt, None, message):
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/game.py", line 284, in invoke_in_new_context
-    return callable(*args, **kwargs)
-  File "renpy/common/00layout.rpy", line 472, in invoke_yesno_prompt
-    rv = layout.yesno_prompt(*args)
-AttributeError: 'Layout' object has no attribute 'yesno_prompt'
-
-While running game code:
-  File "game/script.rpy", line 193, in script
-    menu:
-  File "renpy/common/00action_menu.rpy", line 220, in __call__
-    layout.yesno_screen(layout.QUIT, Quit(False))
-  File "renpy/common/00layout.rpy", line 527, in yesno_screen
-    if renpy.invoke_in_new_context(layout.invoke_yesno_prompt, None, message):
-  File "renpy/common/00layout.rpy", line 472, in invoke_yesno_prompt
-    rv = layout.yesno_prompt(*args)
-AttributeError: 'Layout' object has no attribute 'yesno_prompt'
-Resetting cache.
-Bootstrap to the start of init.init took 2355.32s
-Early init took 0.00s
-Loader init took 0.02s
-Loading error handling took 0.02s
-Loading script took 0.23s
-Loading save slot metadata. took 0.02s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.03s
-Loading analysis data took 0.03s
+Running init code took 0.02s
+Loading analysis data took 0.02s
 Analyze and compile ATL took 0.00s
 Index archives took 0.00s
 Backing up script files to 'C:\\Users\\tuyak\\AppData\\Roaming/RenPy/backups\\visual novella':
-Dump and make backups. took 0.01s
+Dump and make backups. took 0.00s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
-Initial gc. took 0.06s
+Initial gc. took 0.02s
 DPI scale factor: 1.250000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.50s
+Creating interface object took 0.38s
 Cleaning stores took 0.00s
-Init translation took 0.04s
+Init translation took 0.02s
 Build styles took 0.00s
 Load screen analysis took 0.00s
 Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.05s
+Save screen analysis took 0.02s
+Prepare screens took 0.04s
 Save pyanalysis. took 0.00s
 Save bytecode. took 0.01s
 Running _start took 0.00s
 Performance test:
-Interface start took 0.08s
+Interface start took 0.04s
 
 Initializing gl2 renderer:
 primary display bounds: (0, 0, 1920, 1080)
@@ -610,99 +143,17 @@ Load screen analysis took 0.02s
 Analyze screens took 0.00s
 Prepare screens took 0.00s
 Running _start took 0.00s
-
-Full traceback:
-  File "game/script.rpy", line 283, in script
-    "{cps=25}Түн қараңғысында...{/cps}"
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
-    who(what, *args, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
-    **display_args)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
-    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 4035, in interact_core
-    self.quit_event()
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/core.py", line 2977, in quit_event
-    renpy.display.behavior.run(renpy.config.quit_action)
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/display/behavior.py", line 330, in run
-    return action(*args, **kwargs)
-  File "renpy/common/00action_menu.rpy", line 220, in __call__
-    layout.yesno_screen(layout.QUIT, Quit(False))
-  File "renpy/common/00layout.rpy", line 527, in yesno_screen
-    if renpy.invoke_in_new_context(layout.invoke_yesno_prompt, None, message):
-  File "C:\Users\tuyak\Desktop\projects\visual novella\renpy-7.4.11-sdk/renpy/game.py", line 284, in invoke_in_new_context
-    return callable(*args, **kwargs)
-  File "renpy/common/00layout.rpy", line 472, in invoke_yesno_prompt
-    rv = layout.yesno_prompt(*args)
-AttributeError: 'Layout' object has no attribute 'yesno_prompt'
-
-While running game code:
-  File "game/script.rpy", line 283, in script
-    "{cps=25}Түн қараңғысында...{/cps}"
-  File "renpy/common/00action_menu.rpy", line 220, in __call__
-    layout.yesno_screen(layout.QUIT, Quit(False))
-  File "renpy/common/00layout.rpy", line 527, in yesno_screen
-    if renpy.invoke_in_new_context(layout.invoke_yesno_prompt, None, message):
-  File "renpy/common/00layout.rpy", line 472, in invoke_yesno_prompt
-    rv = layout.yesno_prompt(*args)
-AttributeError: 'Layout' object has no attribute 'yesno_prompt'
-Resetting cache.
-Bootstrap to the start of init.init took 4685.05s
-Early init took 0.00s
-Loader init took 0.03s
-Loading error handling took 0.07s
-Loading script took 1.25s
-Loading save slot metadata. took 0.11s
-Loading persistent took 0.00s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.06s
-Loading analysis data took 0.03s
-Analyze and compile ATL took 0.00s
-Index archives took 0.00s
-Backing up script files to 'C:\\Users\\tuyak\\AppData\\Roaming/RenPy/backups\\visual novella':
-Dump and make backups. took 0.00s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.04s
-DPI scale factor: 1.250000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.39s
-Cleaning stores took 0.00s
-Init translation took 0.03s
-Build styles took 0.00s
-Load screen analysis took 0.01s
-Analyze screens took 0.01s
-Save screen analysis took 0.02s
-Prepare screens took 0.04s
-Save pyanalysis. took 0.02s
-Save bytecode. took 0.01s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.05s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1920, 1080)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce GTX 1660 Ti with Max-Q Design/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 591.86'
-Display Info: None
-Screen sizes: virtual=(1280, 720) physical=(1733, 975) drawable=(1733, 975)
-Maximum texture size: 4096x4096
 Cleaning stores took 0.00s
 Init translation took 0.00s
 Build styles took 0.00s
-Load screen analysis took 0.02s
+Load screen analysis took 0.01s
+Analyze screens took 0.00s
+Prepare screens took 0.00s
+Running _start took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.00s
+Build styles took 0.00s
+Load screen analysis took 0.01s
 Analyze screens took 0.00s
 Prepare screens took 0.00s
 Running _start took 0.00s
