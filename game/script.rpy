@@ -1,11 +1,11 @@
 # Определения персонажей
 define a = Character("Асанали")
 
-# Игровые переменные
-default unity = 40
-default army = 1500
+default unity = 50
+default economy = 45
+default army = 60
 default treasury = 30
-default diplomacy = 50
+default external_pressure = 70
 
 # Изображения персонажей
 image kenesary_khan = "images/characters/kenesary_khan.png"
@@ -13,6 +13,12 @@ image agybai_batyr = "images/characters/agybai_batyr.png"
 image nauryzbai_batyr = "images/characters/nauryzbai_batyr.png"
 image bopai = "images/characters/bopai.png"
 image zhankozha = "images/characters/zhankozha.png"
+image bg_1 = "images/bg/bg-1.jpg"
+image bg_1_2 = "images/bg/bg-1_2.jpg"
+image bg_2 = "images/bg/bg-2.jpg"
+image bg_2_2 = "images/bg/bg-2-2.png"
+image bg_3 = "images/bg/bg-3.png"
+image bg_4 = "images/bg/bg-4.png"
 image agybai = "images/characters/agybai.png"
 
 # Фоновые изображения (растянуты на весь экран)
@@ -303,4 +309,92 @@ label start_game:
     voice "<from 10.722>voices/nb-1-2.mp3"
     "{cps=25}Түн қараңғысында...{/cps}"
 
-    return
+    show nauryzbai at nauryzbai_right_mirror
+    show bopai at bopai_left
+
+    voice "voices/bp-1.mp3"
+    "{cps=25}Ал содан кейін... не болмақ, Наурызбай?{/cps}"
+
+    voice "<from 0.0 to 12.649>voices/bp-2.mp3"
+    "{cps=25}Жүз сарбазын қырсақ... мыңын жібереді. Мыңын қырсақ... он мыңын аттандырады. Омбы... бізден бұрын шаршамайды.{/cps}"
+
+    voice "<from 12.649 to 17.647>voices/bp-2.mp3"
+    "{cps=25}Бұл жоңғардың шапқыншылығы емес, бұл — мемлекеттік машина.{/cps}"
+
+    voice "<from 17.647>voices/bp-2.mp3"
+    "{cps=25}Ол ашуланбайды, ол кек алмайды. Ол тек баса береді. Әдіспен, шыдаммен, сені таптап тастағанша тоқтамайды{/cps}"
+
+    voice "<from 0.0 to 5.437>voices/bp-3.mp3"
+    "{cps=25}Бізге уақыт керек. Тағы бір ай. Cонда үш жүздің басы бірігеді.{/cps}"
+
+    voice "<from 5.437>voices/bp-3.mp3"
+    "{cps=25}Сонда ғана шайқас туралы айтуға болады. Қазір емес.{/cps}"
+
+    voice "voices/ab-3.mp3"
+    "{cps=25}Шегінген батырды, халық ұмытпайды!{/cps}"
+
+    scene black
+    with fade
+
+    scene bg_4
+    with fade
+
+    "{cps=25}...{/cps}"
+
+    voice "<from 0.0 to 2.263>voices/kh-14.mp3"
+    "{cps=25}Бопайдікі дұрыс...{/cps}"
+
+    voice "<from 2.263 to 12.544>voices/kh-14.mp3"
+    "{cps=25}Уақыт — бәрінен де маңызды. Уақытсыз әскердің берекесі кетеді, әкемнің одағы сияқты шашылып қалады.{/cps}"
+
+    voice "<from 12.544>voices/kh-14.mp3"
+    "{cps=25}Ақылды хан күте білуі керек{/cps}"
+
+    voice "<from 0.0 to 2.563>voices/kh-15.mp3"
+    "{cps=25}Наурызбай да... дұрыс айтады.{/cps}"
+
+    voice "<from 2.563 to 6.616>voices/kh-15.mp3"
+    "{cps=25}Халық ақылдыны емес, батырды күтеді.{/cps}"
+
+    voice "<from 6.616>voices/kh-15.mp3"
+    "{cps=25}Егер бүгін шегінсем, ертең билердің жартысы күмәндана бастайды... «Бұл сонда... кім болғаны? Оны ақ киізге бекер көтердік пе?»{/cps}"
+
+    voice "<from 0.0 to 6.400>voices/kh-16.mp3"
+    "{cps=25}Мәселе де осында... Екеуінікі де дұрыс.{/cps}"
+
+    voice "<from 6.400 to 12.302>voices/kh-16.mp3"
+    "{cps=25}Ал екі шындықтың арасында таңдау жасау, жақсы мен жаманды таңдау емес.{/cps}"
+
+    voice "<from 12.302>voices/kh-16.mp3"
+    "{cps=25}Бұл — өзіңнің қай бөлігіңді құрбан ететініңді таңдау.{/cps}"
+
+    "{cps=25}...{/cps}"
+
+    voice "<from 0.0 to 4.500>voices/kh-18.mp3"
+    "{cps=25}Тағы бір мәселе — сатқын.{/cps}"
+
+    voice "<from 4.500 to 10.837>voices/kh-18.mp3"
+    "{cps=25}Арамызда Омбының көзі мен құлағы жүр. Бұл казактардан да қауіпті.{/cps}"
+
+    voice "<from 10.837>voices/kh-18.mp3"
+    "{cps=25}Казактармен қалай соғысуды білемін. Ал көлеңкемен... жоқ{/cps}"
+
+    voice "<from 0.0 to 4.200>voices/kh-19.mp3"
+    "{cps=25}Солай болсын... Хан — дұрыс жауапты білетін адам емес.{/cps}"
+
+    voice "<from 4.200>voices/kh-19.mp3"
+    "{cps=25}Хан — дұрыс жауап болмаған кезде, шешім қабылдай алатын адам.{/cps}"
+
+    voice "<from 0.0 to 4.795>voices/kh-20.mp3"
+    "{cps=25}Сонда... не істеуім керек? Қай жолды таңдаймын?{/cps}"
+
+    voice "<from 4.795>voices/kh-20.mp3"
+    "{cps=25}Екі оттың ортасында... қайсысын өшіремін?{/cps}"
+
+    menu:
+        "Таң атпай соққы береміз!":
+            pass
+        "Далада ізімізді суытайық.":
+            pass
+        "Тұзаққа түсіреміз.":
+            pass
