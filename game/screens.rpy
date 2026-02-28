@@ -14,8 +14,8 @@ screen stats_hud():
 
         text _("Бірлік: [unity]") size 18
         text _("Әскер: [army]") size 18
-        text _("Қор: [treasury]") size 18
-        text _("Дипломатия: [diplomacy]") size 18
+        text _("Экономика: [economy]") size 18
+        text _("Қысым: [external_pressure]") size 18
 
 
 screen quick_menu():
