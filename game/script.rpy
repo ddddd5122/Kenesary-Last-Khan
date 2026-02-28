@@ -1,23 +1,44 @@
+# Определения персонажей
 define a = Character("Асанали")
 
+# Игровые переменные
 default unity = 40
 default army = 1500
 default treasury = 30
 default diplomacy = 50
 
+# Изображения персонажей
 image kenesary_khan = "images/characters/kenesary_khan.png"
 image agybai_batyr = "images/characters/agybai_batyr.png"
 image nauryzbai_batyr = "images/characters/nauryzbai_batyr.png"
 image bopai = "images/characters/bopai.png"
 image zhankozha = "images/characters/zhankozha.png"
-image bg_1 = "images/bg/bg-1.jpg"
-image bg_1_2 = "images/bg/bg-1_2.jpg"
-image bg_2 = "images/bg/bg-2.jpg"
-image bg_2_2 = "images/bg/bg-2-2.png"
-image bg_3 = "images/bg/bg-3.png"
 image agybai = "images/characters/agybai.png"
 
+# Фоновые изображения (растянуты на весь экран)
+transform fullscreen_bg:
+    xysize (config.screen_width, config.screen_height)
+    
+image bg_1 = Transform("images/bg/bg-1.jpg", xysize=(config.screen_width, config.screen_height))
+image bg_1_2 = Transform("images/bg/bg-1_2.jpg", xysize=(config.screen_width, config.screen_height))
+image bg_2 = Transform("images/bg/bg-2.jpg", xysize=(config.screen_width, config.screen_height))
+image bg_2_2 = Transform("images/bg/bg-2-2.png", xysize=(config.screen_width, config.screen_height))
+image bg_3 = Transform("images/bg/bg-3.png", xysize=(config.screen_width, config.screen_height))
+
+# Начало игры - переопределено для показа главного меню
+# В Ren'Py label start может вызываться автоматически, поэтому мы перенаправляем его в меню
 label start:
+    # Показываем главное меню
+    call screen main_menu
+    return
+
+# Настоящее начало игры - вызывается кнопкой "Начать новую игру"
+label start_game:
+        
+    # Показываем HUD и быстрое меню только во время игры
+    $ renpy.show_screen("stats_hud")
+    $ renpy.show_screen("quick_menu")
+    
     scene black
     with fade
 
