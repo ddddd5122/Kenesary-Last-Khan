@@ -32,13 +32,23 @@ screen quick_menu():
         textbutton _( "Пропустить" ) action Skip() style "quick_menu_button"
 
     # Кнопка "три полоски" справа сверху
-    textbutton "≡" action ToggleScreenVariable("quick_menu_open") style "quick_menu_toggle":
+    imagebutton:
+        idle im.Scale("images/ui/menu_icon.png", 96, 96)
+        hover im.Scale("images/ui/menu_icon.png", 96, 96)
+        action ToggleScreenVariable("quick_menu_open")
+        focus_mask True
+        mouse "button"
         xalign 0.98
         yalign 0.02
 
     # Кнопка "Справочник" слева от "три полоски"
-    textbutton "Справочник" action ShowMenu("help") style "quick_menu_top_button":
-        xalign 0.88
+    imagebutton:
+        idle im.Scale("images/ui/book_icon.png", 96, 96)
+        hover im.Scale("images/ui/book_icon.png", 96, 96)
+        action ShowMenu("help")
+        focus_mask True
+        mouse "button"
+        xalign 0.93
         yalign 0.02
 
     if quick_menu_open:
