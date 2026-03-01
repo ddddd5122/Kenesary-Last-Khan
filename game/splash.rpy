@@ -1,9 +1,9 @@
-# Заставка с логотипом студии
+# Студия логотипімен бастапқы экран
 label splashscreen:
     scene black
     with Pause(1)
     
-    # Показываем логотип студии
+    # Студия логотипін көрсетеміз
     show image "images/splash/studio_logo.jpg" at truecenter
     with dissolve
     pause 3.0
@@ -11,5 +11,5 @@ label splashscreen:
     scene black
     with dissolve
     
-    # Возвращаемся в главное меню вместо запуска label start
+    # label start іске қосудың орнына басты мәзірге қайтамыз
     return

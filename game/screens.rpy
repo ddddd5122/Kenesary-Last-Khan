@@ -1,4 +1,4 @@
-# Постоянно видимые характеристики (HUD)
+# Үнемі көрінетін сипаттамалар (HUD)
 
 screen stats_hud():
     zorder 100
@@ -28,16 +28,16 @@ screen quick_menu():
         yalign 0.98
         spacing 12
 
-        textbutton _( "Назад" ) action Rollback() style "quick_menu_button"
-        textbutton _( "Пропустить" ) action Skip() style "quick_menu_button"
+        textbutton _( "Артқа" ) action Rollback() style "quick_menu_button"
+        textbutton _( "Өткізу" ) action Skip() style "quick_menu_button"
 
-    # Кнопка "три полоски" справа сверху
+    # Үш сызық түймесі оң жақ жоғарыда
     textbutton "≡" action ToggleScreenVariable("quick_menu_open") style "quick_menu_toggle":
         xalign 0.98
         yalign 0.02
 
-    # Кнопка "Справочник" слева от "три полоски"
-    textbutton "Справочник" action ShowMenu("help") style "quick_menu_top_button":
+    # "Анықтама" түймесі үш сызықтың сол жағында
+    textbutton "Анықтама" action ShowMenu("help") style "quick_menu_top_button":
         xalign 0.88
         yalign 0.02
 
@@ -51,9 +51,9 @@ screen quick_menu():
 
             vbox:
                 spacing 8
-                textbutton "Главное меню" action MainMenu(confirm=True) style "quick_menu_dropdown_button"
-                textbutton "Сохранить" action ShowMenu("save") style "quick_menu_dropdown_button"
-                textbutton "Настройки" action ShowMenu("preferences") style "quick_menu_dropdown_button"
+                textbutton "Басты мәзір" action MainMenu(confirm=True) style "quick_menu_dropdown_button"
+                textbutton "Сақтау" action ShowMenu("save") style "quick_menu_dropdown_button"
+                textbutton "Баптаулар" action ShowMenu("preferences") style "quick_menu_dropdown_button"
 
 style quick_menu_toggle:
     size 36
@@ -110,7 +110,7 @@ style quick_menu_dropdown_button_text:
     xalign 0.5
     text_align 0.5
 
-## Окно диалога (say screen)
+## Диалог терезесі (say screen)
 screen say(who, what):
     zorder 10
 
@@ -155,7 +155,7 @@ style say_dialogue:
     xalign 0.0
     text_align 0.0
 
-## Кнопки выборов (menu choices)
+## Таңдау түймелері (menu choices)
 style choice_button is button
 style choice_button:
     mouse "button"
@@ -251,19 +251,19 @@ style help_back_button_text:
     hover_color "#ffffff"
 
 
-## Главное меню с фото фоном
+## Фотосуретті фонды басты мәзір
 screen main_menu():
     tag menu
     
-    # Запуск музыки при инициализации экрана
+    # Экранды бастапқы қалпына келтіргенде музыканы іске қосу
     python:
         if not renpy.music.get_playing(channel='music'):
             renpy.music.play("audio/music/main_menu.mp3", channel='music', fadein=2.0)
     
-    # Фото фон
+    # Фотосурет фоны
     add "images/bg/head_menu.png" size (1920, 1080)
     
-    # Меню кнопок справа
+    # Оң жақтағы түймелер мәзірі
     vbox:
         xalign 0.7
         yalign 0.5
@@ -286,7 +286,7 @@ screen main_menu():
                 add Solid("#d4af37") xsize 600 ysize 2 xpos 0 ypos 90 at menu_button_line
 
                 add "images/ui/for_button.png" xysize (80, 80) xpos 12 yalign 0.5 at menu_button_ornament
-                text "Новая игра" style "main_menu_button_text" at menu_button_text_anim xalign 0.5 yalign 0.5
+                text "Жаңа ойын" style "main_menu_button_text" at menu_button_text_anim xalign 0.5 yalign 0.5
                 add "images/ui/for_button.png" xysize (80, 80) xzoom -1 xpos 508 yalign 0.5 at menu_button_ornament
 
         button:
@@ -303,7 +303,7 @@ screen main_menu():
                 add Solid("#d4af37") xsize 600 ysize 2 xpos 0 ypos 90 at menu_button_line
 
                 add "images/ui/for_button.png" xysize (80, 80) xpos 12 yalign 0.5 at menu_button_ornament
-                text "Продолжить" style "main_menu_button_text" at menu_button_text_anim xalign 0.5 yalign 0.5
+                text "Жалғастыру" style "main_menu_button_text" at menu_button_text_anim xalign 0.5 yalign 0.5
                 add "images/ui/for_button.png" xysize (80, 80) xzoom -1 xpos 508 yalign 0.5 at menu_button_ornament
 
         button:
@@ -320,7 +320,7 @@ screen main_menu():
                 add Solid("#d4af37") xsize 600 ysize 2 xpos 0 ypos 90 at menu_button_line
 
                 add "images/ui/for_button.png" xysize (80, 80) xpos 12 yalign 0.5 at menu_button_ornament
-                text "Справочник" style "main_menu_button_text" at menu_button_text_anim xalign 0.5 yalign 0.5
+                text "Анықтама" style "main_menu_button_text" at menu_button_text_anim xalign 0.5 yalign 0.5
                 add "images/ui/for_button.png" xysize (80, 80) xzoom -1 xpos 508 yalign 0.5 at menu_button_ornament
 
         button:
@@ -337,7 +337,7 @@ screen main_menu():
                 add Solid("#d4af37") xsize 600 ysize 2 xpos 0 ypos 90 at menu_button_line
 
                 add "images/ui/for_button.png" xysize (80, 80) xpos 12 yalign 0.5 at menu_button_ornament
-                text "Настройки" style "main_menu_button_text" at menu_button_text_anim xalign 0.5 yalign 0.5
+                text "Баптаулар" style "main_menu_button_text" at menu_button_text_anim xalign 0.5 yalign 0.5
                 add "images/ui/for_button.png" xysize (80, 80) xzoom -1 xpos 508 yalign 0.5 at menu_button_ornament
 
         button:
@@ -354,7 +354,7 @@ screen main_menu():
                 add Solid("#d4af37") xsize 600 ysize 2 xpos 0 ypos 90 at menu_button_line
 
                 add "images/ui/for_button.png" xysize (80, 80) xpos 12 yalign 0.5 at menu_button_ornament
-                text "Об игре" style "main_menu_button_text" at menu_button_text_anim xalign 0.5 yalign 0.5
+                text "Ойын туралы" style "main_menu_button_text" at menu_button_text_anim xalign 0.5 yalign 0.5
                 add "images/ui/for_button.png" xysize (80, 80) xzoom -1 xpos 508 yalign 0.5 at menu_button_ornament
 
         button:
@@ -371,7 +371,7 @@ screen main_menu():
                 add Solid("#d4af37") xsize 600 ysize 2 xpos 0 ypos 90 at menu_button_line
 
                 add "images/ui/for_button.png" xysize (80, 80) xpos 12 yalign 0.5 at menu_button_ornament
-                text "Выход" style "main_menu_button_text" at menu_button_text_anim xalign 0.5 yalign 0.5
+                text "Шығу" style "main_menu_button_text" at menu_button_text_anim xalign 0.5 yalign 0.5
                 add "images/ui/for_button.png" xysize (80, 80) xzoom -1 xpos 508 yalign 0.5 at menu_button_ornament
 
 transform menu_button_zoom:
@@ -404,14 +404,14 @@ transform menu_button_text_anim:
     on hover:
         ease 0.18 zoom 1.06
 
-## Стиль заголовка главного меню
+## Басты мәзір тақырыбының стилі
 style main_menu_title:
     size 36
     bold True
     color "#d4af37"
     xalign 0.5
 
-## Стиль кнопок главного меню
+## Басты мәзір түймелерінің стилі
 style main_menu_button:
     xsize 600
     ysize 92
@@ -429,7 +429,7 @@ style main_menu_button_text:
     xalign 0.5
     text_align 0.5
 
-## Стили для баров (ползунков)
+## Барлар үшін стильдер (жылжытқыштар)
 style bar:
     ysize 30
     left_bar "#d4af37"
@@ -446,12 +446,12 @@ style vbar:
     thumb_offset 0
     thumb_shadow None
 
-## Экран справочника
+## Анықтама экраны
 screen help():
     tag menu
     layer "screens"
 
-    default selected_category = "Персонажи"
+    default selected_category = "Кейіпкерлер"
     default selected_character = "Кенесары"
 
     frame:
@@ -463,7 +463,7 @@ screen help():
         padding (0, 0)
 
         fixed:
-            # Границы и разделители
+            # Шекаралар және бөлгіштер
             add Solid("#d4af37") xsize 1800 ysize 2 xpos 0 ypos 0
             add Solid("#d4af37") xsize 1800 ysize 2 xpos 0 ypos 898
             add Solid("#d4af37") xsize 2 ysize 900 xpos 0 ypos 0
@@ -472,27 +472,27 @@ screen help():
             add Solid("#d4af37") xsize 2 ysize 900 xpos 580 ypos 0
             add Solid("#d4af37") xsize 1800 ysize 2 xpos 0 ypos 90
 
-            # Верхняя панель
-            text "КАТЕГОРИИ" style "help_header" xpos 30 ypos 30
-            text "ПЕРСОНАЖИ" style "help_header" xpos 300 ypos 30
+            # Жоғарғы панель
+            text "САНАТТАР" style "help_header" xpos 30 ypos 30
+            text "КЕЙІПКЕРЛЕР" style "help_header" xpos 300 ypos 30
 
-            textbutton "← ВЕРНУТЬСЯ В МЕНЮ" action Return() style "help_back_button":
+            textbutton "← МӘЗІРГЕ ОРАЛУ" action Return() style "help_back_button":
                 xalign 1.0
                 yalign 0.0
                 xoffset -20
                 yoffset 20
 
-            # Левый список (категории)
+            # Сол жақ тізім (санаттар)
             vbox:
                 xpos 30
                 ypos 130
                 spacing 16
 
-                textbutton "Персонажи" action SetScreenVariable("selected_category", "Персонажи") style ("help_item_button_selected" if selected_category == "Персонажи" else "help_item_button") text_style ("help_item_active" if selected_category == "Персонажи" else "help_item")
-                textbutton "Термины" action SetScreenVariable("selected_category", "Термины") style ("help_item_button_selected" if selected_category == "Термины" else "help_item_button") text_style ("help_item_active" if selected_category == "Термины" else "help_item")
-                textbutton "События" action SetScreenVariable("selected_category", "События") style ("help_item_button_selected" if selected_category == "События" else "help_item_button") text_style ("help_item_active" if selected_category == "События" else "help_item")
+                textbutton "Кейіпкерлер" action SetScreenVariable("selected_category", "Кейіпкерлер") style ("help_item_button_selected" if selected_category == "Кейіпкерлер" else "help_item_button") text_style ("help_item_active" if selected_category == "Кейіпкерлер" else "help_item")
+                textbutton "Терминдер" action SetScreenVariable("selected_category", "Терминдер") style ("help_item_button_selected" if selected_category == "Терминдер" else "help_item_button") text_style ("help_item_active" if selected_category == "Терминдер" else "help_item")
+                textbutton "Оқиғалар" action SetScreenVariable("selected_category", "Оқиғалар") style ("help_item_button_selected" if selected_category == "Оқиғалар" else "help_item_button") text_style ("help_item_active" if selected_category == "Оқиғалар" else "help_item")
 
-            # Средний список (персонажи)
+            # Орта тізім (кейіпкерлер)
             vbox:
                 xpos 300
                 ypos 130
@@ -528,7 +528,7 @@ screen help():
                 else:
                     textbutton "???" style "help_item_button" text_style "help_item" sensitive False
 
-            # Правая область: карточка персонажа
+            # Оң жақ аймақ: кейіпкер картасы
             if is_character_unlocked(selected_character):
                 text "[selected_character]" style "help_title" xpos 620 ypos 130
             else:
@@ -555,7 +555,7 @@ screen help():
 
                             if not is_character_unlocked(selected_character):
                                 add Solid("#222222") xysize (352, 512) xalign 0.5 yalign 0.5
-                                text "ПЕРСОНАЖ НЕ ОТКРЫТ" style "help_photo_label" xalign 0.5 yalign 0.85
+                                text "КЕЙІПКЕР АШЫЛМАҒАН" style "help_photo_label" xalign 0.5 yalign 0.85
                             elif selected_character == "Кенесары":
                                 add "images/characters/kenesary_khan.png" fit "cover" xysize (352, 512) xalign 0.5 yalign 0.5
                             elif selected_character == "Жанқожа":
@@ -568,7 +568,7 @@ screen help():
                                 add "images/characters/bopai.png" fit "cover" xysize (352, 512) xalign 0.5 yalign 0.5
                             else:
                                 add Solid("#222222") xysize (352, 512) xalign 0.5 yalign 0.5
-                                text "ПОРТРЕТ ВЫДАЮЩЕГОСЯ БАТЫРА" style "help_photo_label" xalign 0.5 yalign 0.85
+                                text "БАТЫРДЫҢ ПОРТРЕТІ" style "help_photo_label" xalign 0.5 yalign 0.85
 
                     frame:
                         xsize 12
@@ -589,7 +589,7 @@ screen help():
                             xfill True
                             spacing 18
                             if not is_character_unlocked(selected_character):
-                                text "Персонаж будет открыт по мере прохождения истории." style "help_body"
+                                text "Кейіпкер тарих өтуі барысында ашылады." style "help_body"
                             elif selected_character == "Кенесары":
                                 text "Кенесары Қасымұлы — жай ғана көтеріліс жетекшісі емес, ол барлық үш жүздің соңғы мойындалған ханы, аңызға айналған Абылай ханның немересі және Шыңғыс ханның тікелей ұрпағы. Замандастарының көбінен айырмашылығы, Кенесары жеке пайдасын немесе уақытша одақтарды көздеген жоқ; оның басты мақсаты — Қазақ хандығының тәуелсіздігін отарлау басталғанға дейінгі шекарада қалпына келтіру болды." style "help_body"
                                 text "Оның бойында сирек кездесетін қасиеттер: дипломаттың көрегендігі мен әскери қолбасшының қатаң ерік-жігері ұштасқан. Кенесары Даладағы соғыс жүргізудің ескі әдістері империяның тұрақты әскеріне қарсы тұра алмайтынын түсінді. Сондықтан ол түбегейлі реформалар жүргізді: қатаң тәртіпке негізделген тұрақты армия құрды, оқ құю үшін көшпелі ұстаханалар ұйымдастырды, тіпті өз артиллериясын жасауға талпынды. Оны халық құрметтеді, сонымен бірге одан сескенді — Отанға опасыздық жасағаны немесе қашқындығы үшін ол тегіне қарамай өлім жазасына кесетін." style "help_body"
@@ -610,7 +610,7 @@ screen help():
                             elif selected_character == "Бопай":
                                 text "Бопай ханым: Даланың қайсар ханшайымы" style "help_body"
                                 text "Бопай Қасымқызы — Кенесары ханның қарындасы, қазақ тарихындағы бірегей тұлға, дипломат және қолбасшы. Ол Кенесары бастаған ұлт-азаттық қозғалысына белсене қатысып, ерлермен иық тіресе соғысқан нағыз жауынгер әйелдің символына айналды." style "help_body"
-                                text "Бопай ханым тек ханның қарындасы ғана емес, оның ең сенімді кеңесшілерінің бірі болды. Ол 600-ден астам сарбаздан тұратын ерекше жасақты басқарды. Это жасақ негізінен барлау жұмыстарымен, қамтамасыз ету мәселелерімен және жазалаушы отрядтарға тұтқиылдан соққы берумен айналысты. Бопай ханымның стратегиялық ойлау қабілеті мен ұйымдастырушылық дарыны Кенесары әскерінің ішкі тәртібін нығайтуға үлкен септігін тигізді." style "help_body"
+                                text "Бопай ханым тек ханның қарындасы ғана емес, оның ең сенімді кеңесшілерінің бірі болды. Ол 600-ден астам сарбаздан тұратын ерекше жасақты басқарды. Бұл жасақ негізінен барлау жұмыстарымен, қамтамасыз ету мәселелерімен және жазалаушы отрядтарға тұтқиылдан соққы берумен айналысты. Бопай ханымның стратегиялық ойлау қабілеті мен ұйымдастырушылық дарыны Кенесары әскерінің ішкі тәртібін нығайтуға үлкен септігін тигізді." style "help_body"
                                 text "Оның тағдыры ерік-жігердің үлгісі іспеттес. Бопай өзінің жайлы өмірін, отбасылық тыныштығын Отан азаттығы жолындағы күреске айырбастады. Ол көтеріліс кезінде ел ішіндегі бірлікті сақтау үшін дипломатиялық келіссөздер жүргізіп, ру басыларын хан маңына топтастыруға күш салды. Оның есімінен жаулары сескенетін, ал халық оны ерлігі үшін ерекше қадірледі." style "help_body"
                                 text "1847 жылы Кенесары хан мен Наурызбай батыр қаза тапқаннан кейін де, Бопай ханым күресті тоқтатқан жоқ. Ол қозғалыстың қалдықтарын біріктіруге тырысып, соңғы деміне дейін Қасым сұлтандарының асқақ рухын сақтап қалды." style "help_body"
                             else:
@@ -628,9 +628,9 @@ screen character_unlock_notification():
         background "#000000c0"
         padding (20, 12)
 
-        text "Новый персонаж открыт в справочнике" style "help_body" xalign 0.5
+        text "Анықтамада жаңа кейіпкер ашылды" style "help_body" xalign 0.5
 
-## Экран "Об игре"
+## "Ойын туралы" экраны
 screen about():
     tag menu
     layer "screens"
@@ -648,31 +648,31 @@ screen about():
             yalign 0.5
             spacing 30
             
-            text "Кенесары - Последний Хан" size 42 bold True xalign 0.5 color "#d4af37"
-            text "Версия 1.0.0" size 24 xalign 0.5
+            text "Кенесары - Соңғы Хан" size 42 bold True xalign 0.5 color "#d4af37"
+            text "Нұсқа 1.0.0" size 24 xalign 0.5
             
             null height 40
             
-            text "Историческая визуальная новелла о жизни" size 22 xalign 0.5
-            text "последнего казахского хана Кенесары Касымулы" size 22 xalign 0.5
+            text "Соңғы қазақ ханы Кенесары Қасымұлының" size 22 xalign 0.5
+            text "өміріне арналған тарихи визуалды роман" size 22 xalign 0.5
             
             null height 50
             
-            text "Разработано:" size 28 bold True xalign 0.5 color "#d4af37"
+            text "Әзірлеген:" size 28 bold True xalign 0.5 color "#d4af37"
             text "Qazaq Games Studio" size 22 xalign 0.5
             
             null height 40
             
-            text "© 2026 Все права защищены" size 18 xalign 0.5
+            text "© 2026 Барлық құқықтар қорғалған" size 18 xalign 0.5
             
-        textbutton "Назад" action Return() xalign 0.5 ypos 630 style "main_menu_button"
+        textbutton "Артқа" action Return() xalign 0.5 ypos 630 style "main_menu_button"
 
-## Экран подтверждения
+## Растау экраны
 screen confirm(message, yes_action, no_action):
     modal True
     zorder 200
     
-    # Полупрозрачный черный фон вместо картинки
+    # Жартылай мөлдір қара фон
     add "#00000080"
     
     frame:
@@ -694,10 +694,10 @@ screen confirm(message, yes_action, no_action):
                 xalign 0.5
                 spacing 50
                 
-                textbutton "Да" action yes_action style "main_menu_button"
-                textbutton "Нет" action no_action style "main_menu_button"
+                textbutton "Иә" action yes_action style "main_menu_button"
+                textbutton "Жоқ" action no_action style "main_menu_button"
 
-## Экран настроек (базовый)
+## Баптаулар экраны (негізгі)
 screen preferences():
     tag menu
     layer "screens"
@@ -714,16 +714,16 @@ screen preferences():
             xalign 0.5
             spacing 30
             
-            text "НАСТРОЙКИ" size 40 bold True xalign 0.5 color "#d4af37"
+            text "БАПТАУЛАР" size 40 bold True xalign 0.5 color "#d4af37"
             
             null height 20
             
-            # Громкость музыки
+            # Музыка дыбысы
             vbox:
                 xalign 0.5
                 spacing 8
                 
-                text "Громкость музыки:" size 24 color "#ffffff" xalign 0.5
+                text "Музыка дыбысы:" size 24 color "#ffffff" xalign 0.5
                 bar:
                     value Preference("music volume")
                     xsize 600
@@ -733,12 +733,12 @@ screen preferences():
                     right_bar "#404040"
                     thumb "#ffffff"
             
-            # Громкость звука
+            # Дыбыс эффектілері
             vbox:
                 xalign 0.5
                 spacing 8
                 
-                text "Громкость звука:" size 24 color "#ffffff" xalign 0.5
+                text "Дыбыс эффектілері:" size 24 color "#ffffff" xalign 0.5
                 bar:
                     value Preference("sound volume")
                     xsize 600
@@ -748,26 +748,26 @@ screen preferences():
                     right_bar "#404040"
                     thumb "#ffffff"
             
-            # Полный экран
+            # Толық экран
             hbox:
                 xalign 0.5
                 spacing 20
                 
-                text "Полный экран:" size 24 color "#ffffff" yalign 0.5
-                textbutton "Вкл/Выкл" action Preference("display", "toggle") yalign 0.5
+                text "Толық экран:" size 24 color "#ffffff" yalign 0.5
+                textbutton "Қосу/Өшіру" action Preference("display", "toggle") yalign 0.5
             
             null height 20
             
-            textbutton "Назад" action Return() xalign 0.5 style "main_menu_button"
+            textbutton "Артқа" action Return() xalign 0.5 style "main_menu_button"
 
-## Экраны сохранения/загрузки
+## Сақтау/жүктеу экрандары
 screen save():
     tag menu
-    use file_slots("СОХРАНИТЬ ИГРУ", is_load=False)
+    use file_slots("ОЙЫНДЫ САҚТАУ", is_load=False)
 
 screen load():
     tag menu
-    use file_slots("ЗАГРУЗИТЬ ИГРУ", is_load=True)
+    use file_slots("ОЙЫНДЫ ЖҮКТЕУ", is_load=True)
 
 screen file_slots(title, is_load=False):
     layer "screens"
@@ -801,18 +801,18 @@ screen file_slots(title, is_load=False):
                         vbox:
                             spacing 6
                             add FileScreenshot(i) xysize (330, 90)
-                            text FileTime(i, format="%d.%m.%Y %H:%M", empty="Пусто") size 16 xalign 0.5
+                            text FileTime(i, format="%d.%m.%Y %H:%M", empty="Бос") size 16 xalign 0.5
                             text FileSaveName(i) size 14 xalign 0.5
             
             hbox:
                 xalign 0.5
                 spacing 20
-                textbutton "Пред." action FilePagePrevious() style "main_menu_button"
-                textbutton "След." action FilePageNext() style "main_menu_button"
+                textbutton "Алдыңғы" action FilePagePrevious() style "main_menu_button"
+                textbutton "Келесі" action FilePageNext() style "main_menu_button"
             
-            textbutton "Назад" action Return() xalign 0.5 style "main_menu_button"
+            textbutton "Артқа" action Return() xalign 0.5 style "main_menu_button"
 
-# HUD и быстрое меню показываются только во время игры, а не в главном меню
+# HUD және жылдам мәзір тек ойын кезінде көрсетіледі, басты мәзірде емес
 init python:
-    # Не добавляем их в overlay_screens - они будут показываться только в игре
+    # Оларды overlay_screens-ке қоспаймыз - олар тек ойында көрсетіледі
     pass

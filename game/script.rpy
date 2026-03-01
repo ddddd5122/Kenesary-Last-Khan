@@ -1,4 +1,4 @@
-# Определения персонажей
+# Кейіпкерлерді анықтау
 define a = Character("Асанали")
 define k = Character("Кенесары")
 define zb = Character("Жанқожа")
@@ -30,7 +30,7 @@ init python:
             encyclopedia_characters_unlocked[name] = True
             renpy.show_screen("character_unlock_notification")
 
-# Изображения персонажей
+# Кейіпкерлер суреттері
 image kenesary_khan = "images/characters/kenesary_khan.png"
 image agybai_batyr = "images/characters/agybai_batyr.png"
 image nauryzbai_batyr = "images/characters/nauryzbai_batyr.png"
@@ -44,7 +44,7 @@ image bg_3 = "images/bg/bg-3.png"
 image bg_4 = "images/bg/bg-4.png"
 image agybai = "images/characters/agybai.png"
 
-# Фоновые изображения (растянуты на весь экран)
+# Фондық суреттер (толық экранға созылған)
 transform fullscreen_bg:
     xysize (config.screen_width, config.screen_height)
     
@@ -54,17 +54,17 @@ image bg_2 = Transform("images/bg/bg-2.jpg", xysize=(config.screen_width, config
 image bg_2_2 = Transform("images/bg/bg-2-2.png", xysize=(config.screen_width, config.screen_height))
 image bg_3 = Transform("images/bg/bg-3.png", xysize=(config.screen_width, config.screen_height))
 
-# Начало игры - переопределено для показа главного меню
-# В Ren'Py label start может вызываться автоматически, поэтому мы перенаправляем его в меню
+# Ойынның басталуы - басты мәзірді көрсету үшін қайта анықталған
+# Ren'Py-де label start автоматты түрде шақырылуы мүмкін, сондықтан оны мәзірге бағыттаймыз
 label start:
-    # Показываем главное меню
+    # Басты мәзірді көрсетеміз
     call screen main_menu
     return
 
-# Настоящее начало игры - вызывается кнопкой "Начать новую игру"
+# Ойынның шынайы басталуы - "Жаңа ойын" түймесімен шақырылады
 label start_game:
         
-    # Показываем HUD и быстрое меню только во время игры
+    # HUD және жылдам мәзірді тек ойын кезінде көрсетеміз
     $ renpy.show_screen("stats_hud")
     $ renpy.show_screen("quick_menu")
     
@@ -284,7 +284,7 @@ label start_game:
             k "{cps=25}Ешқандай ақша, ешқандай есеп-қисапсыз. Түсінікті әрі әділ.{/cps}"
 
             play sound "voices/sounds/zvuk-tolpy-ljudej.mp3"
-            "{cps=25}*радость в толпе*{/cps}"
+            "{cps=25}*топтағы қуаныш*{/cps}"
             stop sound fadeout 1.0
 
     scene black
@@ -298,11 +298,11 @@ label start_game:
     "{cps=25}...{/cps}"
 
     play sound "voices/sounds/topot_horse.mp3" loop
-    "{cps=25}*топот лошади*{/cps}"
+    "{cps=25}*аттың тұяғы*{/cps}"
     stop sound
 
     play sound "voices/sounds/zvuk_hodb1.mp3" loop
-    "{cps=25}*звук ходьбы*{/cps}"
+    "{cps=25}*жүріс дыбысы*{/cps}"
     stop sound
 
     show agybai at agybai_right

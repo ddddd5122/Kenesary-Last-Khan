@@ -1,44 +1,50 @@
-## Настройки дисплея
+## Дисплей баптаулары
 define config.screen_width = 1920
 define config.screen_height = 1080
-define config.window_title = "Кенесары - Последний Хан"
+define config.window_title = "Кенесары - Соңғы Хан"
 define config.window_icon = "gui/window_icon.png"
+
+## Тіл баптаулары
+define config.language = "kazakh"
 
 init -1 python:
     config.default_music_volume = 0.08
+    
+    # Стандартты хабарламаларды аудару
+    config.quit_action = ui.callsinnewcontext("confirm", message="Шынымен шығуды қалайсыз ба?", yes=Quit(confirm=False), no=Return())
 
-    # Курсоры: обычный и при наведении на кликабельные элементы
-    # Отключаем системный курсор, чтобы использовался config.mouse
+    # Курсорлар: қарапайым және басқару элементтеріне нұсқағанда
+    # Жүйелік курсорды өшіреміз, config.mouse пайдалану үшін
     _preferences.system_cursor = False
     config.mouse = {
         "default": [("images/ui/cursor_1.png", 0, 0)],
         "button": [("images/ui/cursor_2.png", 0, 0)],
     }
 
-    # Запуск в полноэкранном режиме
+    # Толық экран режимінде іске қосу
     if not persistent.fullscreen_set:
         _preferences.fullscreen = True
         persistent.fullscreen_set = True
     
-    # После заставки показываем главное меню
+    # Бастапқы экраннан кейін басты мәзірді көрсету
     config.main_menu_music = "audio/music/main_menu.mp3"
     
-    # Растягиваем изображения на весь экран
+    # Суреттерді бүкіл экранға созу
     config.adjust_view_size = None
     
-    # КРИТИЧНО: Всегда показывать главное меню при запуске
+    # МАҢЫЗДЫ: Іске қосқанда әрқашан басты мәзірді көрсету
     config.auto_load = None
     config.has_autosave = False
     config.has_quicksave = False
     
-    # Отключаем автозапуск label start
-    # Явно указываем, что хотим показать главное меню
+    # label start автоматты іске қосуды өшіру
+    # Басты мәзірді көрсеткіміз келетінін анық көрсету
     def force_main_menu():
         return False
     
     config.game_main_transition = None
     
-# Трансформация для фоновых изображений
+# Фондық суреттерге арналған трансформация
 init python:
-    # Автоматическое растягивание фонов
+    # Фондарды автоматты түрде созу
     config.default_transform = Transform(xysize=(config.screen_width, config.screen_height))
