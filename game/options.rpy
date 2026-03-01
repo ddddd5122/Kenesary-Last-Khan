@@ -6,7 +6,15 @@ define config.window_icon = "gui/window_icon.png"
 
 init -1 python:
     config.default_music_volume = 0.08
-    
+
+    # Курсоры: обычный и при наведении на кликабельные элементы
+    # Отключаем системный курсор, чтобы использовался config.mouse
+    _preferences.system_cursor = False
+    config.mouse = {
+        "default": [("images/ui/cursor_1.png", 0, 0)],
+        "button": [("images/ui/cursor_2.png", 0, 0)],
+    }
+
     # Запуск в полноэкранном режиме
     if not persistent.fullscreen_set:
         _preferences.fullscreen = True
