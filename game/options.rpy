@@ -31,6 +31,10 @@ init -1 python:
     
     # Суреттерді бүкіл экранға созу
     config.adjust_view_size = None
+
+    # Сақтау скриншотының сапасы (16:9)
+    config.thumbnail_width = 960
+    config.thumbnail_height = 540
     
     # МАҢЫЗДЫ: Іске қосқанда әрқашан басты мәзірді көрсету
     config.auto_load = None

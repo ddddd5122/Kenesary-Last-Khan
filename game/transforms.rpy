@@ -54,6 +54,14 @@ transform nauryzbai_right_mirror:
     xalign 1.25
     ease 0.5 xalign 1.25
 
+transform nauryzbai_right_mirror_close:
+    zoom (0.95 * (config.screen_height / 1080.0))
+    xzoom -1
+    alpha 0.0
+    yalign 1.0
+    xalign 1.05
+    ease 0.5 xalign 1.05 alpha 1.0
+
 transform kenesary_center:
     zoom (0.95 * (config.screen_height / 1080.0))
     alpha 0.0
@@ -75,6 +83,20 @@ transform kenesary_edge_left:
     xalign -0.20
     ease 0.5 xalign -0.20
 
+transform kenesary_2_left_mirror:
+    zoom (1.05 * (config.screen_height / 1080.0))
+    xzoom -1
+    yalign 1.0
+    xalign 0.0
+    ease 0.5 xalign 0.0
+
+transform kenesary_2_left_mirror_big:
+    zoom (1.26 * (config.screen_height / 1080.0))
+    xzoom -1
+    yalign 1.0
+    xalign 0.0
+    ease 0.5 xalign 0.0
+
 transform nauryzbai_shift_right_132:
     zoom (0.95 * (config.screen_height / 1080.0))
     xzoom -1
@@ -89,3 +111,6 @@ transform zhankozha_right:
     yalign 1.0
     xalign 1.0
     ease 0.5 xalign 1.0 alpha 1.0
+
+transform help_sheet_tilt:
+    rotate -1.3

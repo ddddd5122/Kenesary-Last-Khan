@@ -1,27 +1,44 @@
 # Үнемі көрінетін сипаттамалар (HUD)
 
+default stats_visible = False
+default menu_window_pause_text = False
+
 screen stats_hud():
     zorder 100
 
-    frame:
-        xalign 0.02
-        yalign 0.02
-        padding (12, 10)
-        background "#0008"
+    if stats_visible:
+        fixed:
+            xalign 0.02
+            yalign 0.02
+            xoffset 20
+            yoffset 120
+            xsize 360
+            ysize 360
 
-        has vbox
-        spacing 2
+            add im.Scale("images/ui/for_info.png", 360, 360)
 
-        text _("Бірлік: [unity]") size 18
-        text _("Әскер: [army]") size 18
-        text _("Экономика: [economy]") size 18
-        text _("Қысым: [external_pressure]") size 18
+            vbox:
+                xpos 78
+                ypos 74
+                xsize 222
+                ysize 230
+                spacing 6
+
+                text _("Бірлік: [unity]") style "stats_info_text"
+                text _("Әскер: [army]") style "stats_info_text"
+                text _("Экономика: [economy]") style "stats_info_text"
+                text _("Қысым: [external_pressure]") style "stats_info_text"
 
 
 screen quick_menu():
     zorder 100
 
-    default quick_menu_open = False
+    if renpy.context()._menu:
+        null
+    else:
+        key "game_menu" action ToggleScreen("menu_window")
+        key "dismiss" action Return()
+        key "K_SPACE" action Return()
 
     hbox:
         xalign 0.5
@@ -31,29 +48,188 @@ screen quick_menu():
         textbutton _( "Артқа" ) action Rollback() style "quick_menu_button"
         textbutton _( "Өткізу" ) action Skip() style "quick_menu_button"
 
-    # Үш сызық түймесі оң жақ жоғарыда
-    textbutton "≡" action ToggleScreenVariable("quick_menu_open") style "quick_menu_toggle":
-        xalign 0.98
-        yalign 0.02
+    # Сол жақ жоғарыдағы иконка (80x80, сол жақтан 20px)
+    hbox:
+        xalign 0.0
+        yalign 0.0
+        xoffset 20
+        yoffset 20
+        spacing 10
 
-    # "Анықтама" түймесі үш сызықтың сол жағында
-    textbutton "Анықтама" action ShowMenu("help") style "quick_menu_top_button":
-        xalign 0.88
-        yalign 0.02
+        imagebutton:
+            idle im.Scale("images/ui/graphic_icon.png", 80, 80)
+            hover im.Scale("images/ui/graphic_icon.png", 80, 80)
+            action ToggleVariable("stats_visible")
+            xsize 80
+            ysize 80
+            mouse "button"
 
-    if quick_menu_open:
-        frame:
-            xalign 0.98
-            yalign 0.08
-            xpadding 16
-            ypadding 12
-            background "#00000090"
+    # Оң жақ жоғарыдағы иконкалар (80x80, оң жақтан 20px)
+    hbox:
+        xalign 1.0
+        yalign 0.0
+        xoffset -20
+        yoffset 20
+        spacing 10
 
-            vbox:
-                spacing 8
-                textbutton "Басты мәзір" action MainMenu(confirm=True) style "quick_menu_dropdown_button"
-                textbutton "Сақтау" action ShowMenu("save") style "quick_menu_dropdown_button"
-                textbutton "Баптаулар" action ShowMenu("preferences") style "quick_menu_dropdown_button"
+        imagebutton:
+            idle im.Scale("images/ui/book_icon.png", 80, 80)
+            hover im.Scale("images/ui/book_icon.png", 80, 80)
+            action [Play("sound", "voices/sounds/freesounds123-book-opening-345808.mp3"), ShowMenu("help")]
+            xsize 80
+            ysize 80
+            mouse "button"
+
+        imagebutton:
+            idle im.Scale("images/ui/menu_icon.png", 80, 80)
+            hover im.Scale("images/ui/menu_icon.png", 80, 80)
+            action ToggleScreen("menu_window")
+            xsize 80
+            ysize 80
+            mouse "button"
+
+screen menu_window():
+    tag menu
+    zorder 120
+    modal True
+
+    key "game_menu" action Hide("menu_window")
+
+    default menu_window_hover = None
+
+    on "show" action [
+        Function(renpy.music.set_pause, True, "voice"),
+        Function(renpy.music.set_pause, True, "sound"),
+        SetVariable("menu_window_pause_text", True)
+    ]
+    on "hide" action [
+        Function(renpy.music.set_pause, False, "voice"),
+        Function(renpy.music.set_pause, False, "sound"),
+        SetVariable("menu_window_pause_text", False)
+    ]
+
+    add Solid("#00000080")
+
+    fixed:
+        xalign 0.5
+        yalign 0.5
+        xsize 900
+        ysize 600
+
+        add RoundRect("#d4af37") xysize (900, 600)
+        add RoundRect("#5a1a1a") xysize (888, 588) xpos 6 ypos 6
+
+        add im.Scale("images/ui/for_ui_win.png", 140, 140) xpos 0 ypos 0
+        add im.Scale("images/ui/for_ui_win.png", 140, 140) xalign 1.0 yalign 0.0 xzoom -1
+        add im.Scale("images/ui/for_ui_win.png", 140, 140) xalign 0.0 yalign 1.0 yzoom -1
+        add im.Scale("images/ui/for_ui_win.png", 140, 140) xalign 1.0 yalign 1.0 xzoom -1 yzoom -1
+
+        vbox:
+            xalign 0.5
+            yalign 0.5
+            spacing 18
+
+            text "МӘЗІР" style "menu_window_title"
+            null height 6
+
+            button:
+                action Hide("menu_window")
+                style "menu_window_button_base"
+                hovered SetScreenVariable("menu_window_hover", "continue")
+                unhovered SetScreenVariable("menu_window_hover", None)
+
+                fixed:
+                    xsize 520
+                    ysize 64
+
+                    add RoundRect("#d4af37", 10) xysize (520, 64)
+                    if menu_window_hover == "continue":
+                        add RoundRect("#ffffff1a", 10) xysize (520, 64)
+                    text "Жалғастыру" style "menu_window_button_text_primary" xalign 0.5 yalign 0.5
+
+            button:
+                action [Hide("menu_window"), ShowMenu("pre_save_capture")]
+                style "menu_window_button_base"
+                hovered SetScreenVariable("menu_window_hover", "save")
+                unhovered SetScreenVariable("menu_window_hover", None)
+
+                fixed:
+                    xsize 520
+                    ysize 64
+
+                    add RoundRect("#5a1a1a", 10) xysize (520, 64)
+                    add RoundRect("#d4af37", 10) xysize (520, 64)
+                    add RoundRect("#5a1a1a", 8) xysize (516, 60) xpos 2 ypos 2
+                    if menu_window_hover == "save":
+                        add RoundRect("#ffffff14", 10) xysize (520, 64)
+                    text "Сақтау" style "menu_window_button_text_gold" xalign 0.5 yalign 0.5
+
+            button:
+                action ShowMenu("preferences")
+                style "menu_window_button_base"
+                hovered SetScreenVariable("menu_window_hover", "prefs")
+                unhovered SetScreenVariable("menu_window_hover", None)
+
+                fixed:
+                    xsize 520
+                    ysize 64
+
+                    add RoundRect("#5a1a1a", 10) xysize (520, 64)
+                    add RoundRect("#d4af37", 10) xysize (520, 64)
+                    add RoundRect("#5a1a1a", 8) xysize (516, 60) xpos 2 ypos 2
+                    if menu_window_hover == "prefs":
+                        add RoundRect("#ffffff14", 10) xysize (520, 64)
+                    text "Баптаулар" style "menu_window_button_text_gold" xalign 0.5 yalign 0.5
+
+            button:
+                action MainMenu(confirm=True)
+                style "menu_window_button_base"
+                hovered SetScreenVariable("menu_window_hover", "main_menu")
+                unhovered SetScreenVariable("menu_window_hover", None)
+
+                fixed:
+                    xsize 520
+                    ysize 64
+
+                    add RoundRect("#5a1a1a", 10) xysize (520, 64)
+                    add RoundRect("#ff2b2b", 10) xysize (520, 64)
+                    add RoundRect("#5a1a1a", 8) xysize (516, 60) xpos 2 ypos 2
+                    if menu_window_hover == "main_menu":
+                        add RoundRect("#ffffff14", 10) xysize (520, 64)
+                    text "Басты мәзір" style "menu_window_button_text_red" xalign 0.5 yalign 0.5
+
+style menu_window_title:
+    size 44
+    color "#d4af37"
+    bold True
+    xalign 0.5
+    text_align 0.5
+
+style menu_window_button_base:
+    background None
+    hover_background None
+    xsize 520
+    ysize 64
+    xalign 0.5
+    mouse "button"
+
+style menu_window_button_text_primary:
+    size 32
+    color "#5a1a1a"
+    xalign 0.5
+    text_align 0.5
+
+style menu_window_button_text_gold:
+    size 32
+    color "#d4af37"
+    xalign 0.5
+    text_align 0.5
+
+style menu_window_button_text_red:
+    size 32
+    color "#ff2b2b"
+    xalign 0.5
+    text_align 0.5
 
 style quick_menu_toggle:
     size 36
@@ -88,6 +264,13 @@ style quick_menu_button:
     hover_background None
     padding (10, 6)
     mouse "button"
+
+style stats_info_text:
+    size 20
+    color "#3b2a1c"
+    bold True
+    xalign 0.0
+    text_align 0.0
 
 style quick_menu_top_button_text:
     color "#ffffff"
@@ -125,54 +308,95 @@ screen say(who, what):
         fixed:
             xysize (config.screen_width, config.screen_height)
 
-            add "images/ui/dialogue_win.png" xalign 0.5 yalign 1.0
+            add im.FactorScale("images/ui/dialogue_win.png", 0.8, 0.8) xalign 0.5 yalign 1.0
 
             if who:
                 text who id "who":
                     style "say_name"
                     xalign 0.5
                     yalign 1.0
-                    yoffset -330
+                    xoffset -2
+                    yoffset -263
 
-            text what id "what":
-                style "say_dialogue"
-                xpos 0.08
-                ypos 0.76
-                xsize 0.84
-                ysize 0.18
+        text what id "what":
+            style "say_dialogue"
+            slow_cps_multiplier (0.0 if menu_window_pause_text else 1.0)
+            xpos 0.13
+            ypos 0.80
+            xsize 0.74
+            ysize 0.14
 
 style say_name:
-    size 28
+    size 24
     bold True
     color "#ffffff"
     xalign 0.5
     text_align 0.5
 
 style say_dialogue:
-    size 34
+    size 26
     color "#e6e6e6"
     line_spacing 8
     xalign 0.0
     text_align 0.0
 
 ## Таңдау түймелері (menu choices)
+screen choice(items):
+    zorder 11
+    modal True
+    key "dismiss" action NullAction()
+
+    window:
+        background None
+        xalign 0.5
+        yalign 0.5
+        xsize config.screen_width
+        ysize config.screen_height
+
+        fixed:
+            xysize (config.screen_width, config.screen_height)
+
+            add im.FactorScale("images/ui/dialogue_win.png", 0.8, 0.8) xalign 0.5 yalign 1.0
+
+            vbox:
+                style_prefix "choice"
+                xpos 0.13
+                ypos 0.80
+                xsize 0.74
+                spacing 12
+
+                for i in items:
+                    textbutton i.caption action i.action
+
 style choice_button is button
 style choice_button:
+    background None
+    hover_background None
+    xalign 0.0
+    xsize 0.84
     mouse "button"
+
+style choice_button_text:
+    size 26
+    color "#e6e6e6"
+    hover_color "#d4af37"
+    line_spacing 8
+    xalign 0.0
+    text_align 0.0
 
 style help_header:
     size 20
     bold True
-    color "#d4af37"
+    color "#6a4a2f"
 
 style help_title:
     size 48
     italic True
-    color "#d4af37"
+    color "#7a5531"
 
 style help_body:
     size 22
-    color "#e6e6e6"
+    color "#5a3c24"
     line_spacing 6
     xmaximum 740
     xsize 740
@@ -182,11 +406,11 @@ style help_body:
 
 style help_item:
     size 22
-    color "#cfcfcf"
+    color "#5a3c24"
 
 style help_item_active:
     size 22
-    color "#d4af37"
+    color "#f3dfb3"
     bold True
 
 style help_item_frame:
@@ -196,41 +420,41 @@ style help_item_frame:
     padding (10, 8)
 
 style help_item_frame_active:
-    background "#2a2416"
+    background "#5a3c24"
     xsize 200
     ysize 40
     padding (10, 8)
 
 style help_item_button:
-    background None
-    hover_background "#2a2416"
+    background "#dfcba6"
+    hover_background "#cdb189"
     xsize 200
     ysize 40
     padding (10, 8)
     mouse "button"
 
 style help_item_button_selected:
-    background "#2a2416"
+    background "#5a3c24"
     xsize 200
     ysize 40
     padding (10, 8)
 
 style help_item_button_text:
-    color "#cfcfcf"
-    hover_color "#d4af37"
+    color "#5a3c24"
+    hover_color "#7a5531"
     size 22
     xalign 0.0
     text_align 0.0
 
 style help_photo_frame:
-    background "#111111"
-    padding (14, 14)
+    background None
+    padding (0, 0)
     xsize 380
     ysize 540
 
 style help_photo_label:
     size 14
-    color "#d4af37"
+    color "#8a6a42"
     xalign 0.5
     text_align 0.5
 
@@ -241,14 +465,14 @@ style help_text_viewport:
 
 style help_back_button:
     size 20
-    color "#d4af37"
+    color "#5a3c24"
     background None
     hover_background None
     mouse "button"
 
 style help_back_button_text:
-    color "#d4af37"
-    hover_color "#ffffff"
+    color "#5a3c24"
+    hover_color "#8a6a42"
 
 
 ## Фотосуретті фонды басты мәзір
@@ -421,6 +645,23 @@ style main_menu_button:
     padding (14, 10)
     mouse "button"
 
+style file_slot_delete_button:
+    xsize 330
+    ysize 36
+    xalign 0.5
+    background "#7a1b1b"
+    hover_background "#b12b2b"
+    padding (10, 6)
+    mouse "button"
+
+style file_slot_delete_button_text:
+    color "#ffffff"
+    hover_color "#ffffff"
+    size 20
+    bold True
+    xalign 0.5
+    text_align 0.5
+
 style main_menu_button_text:
     color "#ffffff"
     hover_color "#d4af37"
@@ -454,167 +695,187 @@ screen help():
     default selected_category = "Кейіпкерлер"
     default selected_character = "Кенесары"
 
+    add "images/bg/head_menu.png" size (1920, 1080)
+
     frame:
         xalign 0.5
         yalign 0.5
         xsize 1800
         ysize 900
-        background "#171717"
+        background None
         padding (0, 0)
 
         fixed:
-            # Шекаралар және бөлгіштер
-            add Solid("#d4af37") xsize 1800 ysize 2 xpos 0 ypos 0
-            add Solid("#d4af37") xsize 1800 ysize 2 xpos 0 ypos 898
-            add Solid("#d4af37") xsize 2 ysize 900 xpos 0 ypos 0
-            add Solid("#d4af37") xsize 2 ysize 900 xpos 1798 ypos 0
-            add Solid("#d4af37") xsize 2 ysize 900 xpos 260 ypos 0
-            add Solid("#d4af37") xsize 2 ysize 900 xpos 580 ypos 0
-            add Solid("#d4af37") xsize 1800 ysize 2 xpos 0 ypos 90
+            xysize (1800, 900)
+            xalign 0.5
+            yalign 0.5
+            yoffset 0
 
-            # Жоғарғы панель
-            text "САНАТТАР" style "help_header" xpos 30 ypos 30
-            text "КЕЙІПКЕРЛЕР" style "help_header" xpos 300 ypos 30
+            add Solid("#0000002a") xysize (1720, 860) xpos 40 ypos 56
+            add Solid("#ffffff") xysize (1680, 820) xpos 60 ypos 40
+            add Solid("#efe2c4") xysize (1648, 788) xpos 76 ypos 56
 
-            textbutton "← МӘЗІРГЕ ОРАЛУ" action Return() style "help_back_button":
-                xalign 1.0
+            # add "images/ui/scrip.png" xysize (140, 140) xpos 96 ypos 56 xoffset 824 yoffset -10
+
+            fixed:
+                xysize (1648, 788)
+                xpos 76
+                ypos 56
+                xalign 0.0
                 yalign 0.0
-                xoffset -20
-                yoffset 20
 
-            # Сол жақ тізім (санаттар)
-            vbox:
-                xpos 30
-                ypos 130
-                spacing 16
+                add Solid("#c9b38b") xsize 2 ysize 788 xpos 260 ypos 0
+                add Solid("#c9b38b") xsize 2 ysize 788 xpos 580 ypos 0
+                add Solid("#c9b38b") xsize 1648 ysize 2 xpos 0 ypos 92
 
-                textbutton "Кейіпкерлер" action SetScreenVariable("selected_category", "Кейіпкерлер") style ("help_item_button_selected" if selected_category == "Кейіпкерлер" else "help_item_button") text_style ("help_item_active" if selected_category == "Кейіпкерлер" else "help_item")
-                textbutton "Терминдер" action SetScreenVariable("selected_category", "Терминдер") style ("help_item_button_selected" if selected_category == "Терминдер" else "help_item_button") text_style ("help_item_active" if selected_category == "Терминдер" else "help_item")
-                textbutton "Оқиғалар" action SetScreenVariable("selected_category", "Оқиғалар") style ("help_item_button_selected" if selected_category == "Оқиғалар" else "help_item_button") text_style ("help_item_active" if selected_category == "Оқиғалар" else "help_item")
+                text "САНАТТАР" style "help_header" xpos 32 ypos 28
+                text "КЕЙІПКЕРЛЕР" style "help_header" xpos 300 ypos 28
 
-            # Орта тізім (кейіпкерлер)
-            vbox:
-                xpos 300
-                ypos 130
-                spacing 16
+                textbutton "← МӘЗІРГЕ ОРАЛУ" action Return() style "help_back_button":
+                    xalign 1.0
+                    yalign 0.0
+                    xoffset -20
+                    yoffset 20
 
-                if is_character_unlocked("Кенесары"):
-                    textbutton "Кенесары" action SetScreenVariable("selected_character", "Кенесары") style ("help_item_button_selected" if selected_character == "Кенесары" else "help_item_button") text_style ("help_item_active" if selected_character == "Кенесары" else "help_item")
+                vbox:
+                    xpos 32
+                    ypos 130
+                    spacing 16
+
+                    textbutton "Кейіпкерлер" action SetScreenVariable("selected_category", "Кейіпкерлер") style ("help_item_button_selected" if selected_category == "Кейіпкерлер" else "help_item_button") text_style ("help_item_active" if selected_category == "Кейіпкерлер" else "help_item")
+                    textbutton "Терминдер" action SetScreenVariable("selected_category", "Терминдер") style ("help_item_button_selected" if selected_category == "Терминдер" else "help_item_button") text_style ("help_item_active" if selected_category == "Терминдер" else "help_item")
+                    textbutton "Оқиғалар" action SetScreenVariable("selected_category", "Оқиғалар") style ("help_item_button_selected" if selected_category == "Оқиғалар" else "help_item_button") text_style ("help_item_active" if selected_category == "Оқиғалар" else "help_item")
+
+                vbox:
+                    xpos 300
+                    ypos 130
+                    spacing 16
+
+                    if is_character_unlocked("Кенесары"):
+                        textbutton "Кенесары" action SetScreenVariable("selected_character", "Кенесары") style ("help_item_button_selected" if selected_character == "Кенесары" else "help_item_button") text_style ("help_item_active" if selected_character == "Кенесары" else "help_item")
+                    else:
+                        textbutton "???" style "help_item_button" text_style "help_item" sensitive False
+
+                    if is_character_unlocked("Жанқожа"):
+                        textbutton "Жанқожа" action SetScreenVariable("selected_character", "Жанқожа") style ("help_item_button_selected" if selected_character == "Жанқожа" else "help_item_button") text_style ("help_item_active" if selected_character == "Жанқожа" else "help_item")
+                    else:
+                        textbutton "???" style "help_item_button" text_style "help_item" sensitive False
+
+                    if is_character_unlocked("Ағыбай батыр"):
+                        textbutton "Ағыбай батыр" action SetScreenVariable("selected_character", "Ағыбай батыр") style ("help_item_button_selected" if selected_character == "Ағыбай батыр" else "help_item_button") text_style ("help_item_active" if selected_character == "Ағыбай батыр" else "help_item")
+                    else:
+                        textbutton "???" style "help_item_button" text_style "help_item" sensitive False
+
+                    if is_character_unlocked("Наурызбай"):
+                        textbutton "Наурызбай" action SetScreenVariable("selected_character", "Наурызбай") style ("help_item_button_selected" if selected_character == "Наурызбай" else "help_item_button") text_style ("help_item_active" if selected_character == "Наурызбай" else "help_item")
+                    else:
+                        textbutton "???" style "help_item_button" text_style "help_item" sensitive False
+
+                    if is_character_unlocked("Абылай-хан"):
+                        textbutton "Абылай-хан" action SetScreenVariable("selected_character", "Абылай-хан") style ("help_item_button_selected" if selected_character == "Абылай-хан" else "help_item_button") text_style ("help_item_active" if selected_character == "Абылай-хан" else "help_item")
+                    else:
+                        textbutton "???" style "help_item_button" text_style "help_item" sensitive False
+
+                    if is_character_unlocked("Бопай"):
+                        textbutton "Бопай" action SetScreenVariable("selected_character", "Бопай") style ("help_item_button_selected" if selected_character == "Бопай" else "help_item_button") text_style ("help_item_active" if selected_character == "Бопай" else "help_item")
+                    else:
+                        textbutton "???" style "help_item_button" text_style "help_item" sensitive False
+
+                add im.Scale("images/ui/bookmark.png", 110, 260) xpos 510 ypos 130 yoffset -178
+
+                if is_character_unlocked(selected_character):
+                    text "[selected_character]" style "help_title" xpos 620 ypos 128
                 else:
-                    textbutton "???" style "help_item_button" text_style "help_item" sensitive False
+                    text "???" style "help_title" xpos 620 ypos 128
 
-                if is_character_unlocked("Жанқожа"):
-                    textbutton "Жанқожа" action SetScreenVariable("selected_character", "Жанқожа") style ("help_item_button_selected" if selected_character == "Жанқожа" else "help_item_button") text_style ("help_item_active" if selected_character == "Жанқожа" else "help_item")
-                else:
-                    textbutton "???" style "help_item_button" text_style "help_item" sensitive False
+                frame:
+                    xpos 620
+                    ypos 210
+                    xsize 980
+                    ysize 520
+                    background None
 
-                if is_character_unlocked("Ағыбай батыр"):
-                    textbutton "Ағыбай батыр" action SetScreenVariable("selected_character", "Ағыбай батыр") style ("help_item_button_selected" if selected_character == "Ағыбай батыр" else "help_item_button") text_style ("help_item_active" if selected_character == "Ағыбай батыр" else "help_item")
-                else:
-                    textbutton "???" style "help_item_button" text_style "help_item" sensitive False
-
-                if is_character_unlocked("Наурызбай"):
-                    textbutton "Наурызбай" action SetScreenVariable("selected_character", "Наурызбай") style ("help_item_button_selected" if selected_character == "Наурызбай" else "help_item_button") text_style ("help_item_active" if selected_character == "Наурызбай" else "help_item")
-                else:
-                    textbutton "???" style "help_item_button" text_style "help_item" sensitive False
-
-                if is_character_unlocked("Абылай-хан"):
-                    textbutton "Абылай-хан" action SetScreenVariable("selected_character", "Абылай-хан") style ("help_item_button_selected" if selected_character == "Абылай-хан" else "help_item_button") text_style ("help_item_active" if selected_character == "Абылай-хан" else "help_item")
-                else:
-                    textbutton "???" style "help_item_button" text_style "help_item" sensitive False
-
-                if is_character_unlocked("Бопай"):
-                    textbutton "Бопай" action SetScreenVariable("selected_character", "Бопай") style ("help_item_button_selected" if selected_character == "Бопай" else "help_item_button") text_style ("help_item_active" if selected_character == "Бопай" else "help_item")
-                else:
-                    textbutton "???" style "help_item_button" text_style "help_item" sensitive False
-
-            # Оң жақ аймақ: кейіпкер картасы
-            if is_character_unlocked(selected_character):
-                text "[selected_character]" style "help_title" xpos 620 ypos 130
-            else:
-                text "???" style "help_title" xpos 620 ypos 130
-
-            frame:
-                xpos 620
-                ypos 210
-                xsize 1180
-                ysize 620
-                background None
-
-                hbox:
-                    spacing 24
-
-                    frame:
-                        style "help_photo_frame"
+                    hbox:
+                        spacing 24
 
                         fixed:
-                            xysize (352, 512)
-                            xalign 0.5
-                            yalign 0.5
+                            xysize (360, 540)
+
+                            add Solid("#00000014") xysize (332, 512) xpos 14 ypos 0
+                            add Solid("#ffffff") xysize (332, 512) xpos 14 ypos 0
+                            add Solid("#1b1b1b") xysize (300, 480) xpos 30 ypos 16
+
+
+                            fixed:
+                                xysize (300, 480)
+                                xpos 30
+                                ypos 16
+                                clipping True
+
+                                if not is_character_unlocked(selected_character):
+                                    add Solid("#222222") xysize (300, 480)
+                                    text "КЕЙІПКЕР АШЫЛМАҒАН" style "help_photo_label" xalign 0.5 yalign 0.85
+                                elif selected_character == "Кенесары":
+                                    add "images/characters/kenesary_khan.png" fit "cover" xysize (300, 480) xalign 0.5 yalign 0.5
+                                elif selected_character == "Жанқожа":
+                                    add "images/characters/zhankozha.png" fit "cover" xysize (300, 480) xalign 0.5 yalign 0.5
+                                elif selected_character == "Ағыбай батыр":
+                                    add "images/characters/agybai.png" fit "cover" xysize (300, 480) xalign 0.5 yalign 0.5
+                                elif selected_character == "Наурызбай":
+                                    add "images/characters/nauryzbai.png" fit "cover" xysize (300, 480) xalign 0.5 yalign 0.5
+                                elif selected_character == "Бопай":
+                                    add "images/characters/bopai.png" fit "cover" xysize (300, 480) xalign 0.5 yalign 0.5
+                                else:
+                                    add Solid("#222222") xysize (300, 480)
+                                    text "БАТЫРДЫҢ ПОРТРЕТІ" style "help_photo_label" xalign 0.5 yalign 0.85
+
+                            add "images/ui/vosk_marker.png" xysize (110, 110) xpos 290 ypos 440
+
+                        frame:
+                            xsize 12
+                            ysize 520
+                            background None
+                            add Solid("#c9b38b") xsize 4 ysize 520 xpos 4 ypos 0
+
+                        viewport:
+                            style "help_text_viewport"
+                            xysize (560, 520)
+                            mousewheel True
+                            scrollbars "vertical"
                             clipping True
 
-                            if not is_character_unlocked(selected_character):
-                                add Solid("#222222") xysize (352, 512) xalign 0.5 yalign 0.5
-                                text "КЕЙІПКЕР АШЫЛМАҒАН" style "help_photo_label" xalign 0.5 yalign 0.85
-                            elif selected_character == "Кенесары":
-                                add "images/characters/kenesary_khan.png" fit "cover" xysize (352, 512) xalign 0.5 yalign 0.5
-                            elif selected_character == "Жанқожа":
-                                add "images/characters/zhankozha.png" fit "cover" xysize (352, 512) xalign 0.5 yalign 0.5
-                            elif selected_character == "Ағыбай батыр":
-                                add "images/characters/agybai.png" fit "cover" xysize (352, 512) xalign 0.5 yalign 0.5
-                            elif selected_character == "Наурызбай":
-                                add "images/characters/nauryzbai.png" fit "cover" xysize (352, 512) xalign 0.5 yalign 0.5
-                            elif selected_character == "Бопай":
-                                add "images/characters/bopai.png" fit "cover" xysize (352, 512) xalign 0.5 yalign 0.5
-                            else:
-                                add Solid("#222222") xysize (352, 512) xalign 0.5 yalign 0.5
-                                text "БАТЫРДЫҢ ПОРТРЕТІ" style "help_photo_label" xalign 0.5 yalign 0.85
-
-                    frame:
-                        xsize 12
-                        ysize 520
-                        background None
-                        add Solid("#d4af37") xsize 4 ysize 520 xpos 4 ypos 0
-
-                    viewport:
-                        style "help_text_viewport"
-                        xysize (740, 520)
-                        mousewheel True
-                        scrollbars "vertical"
-                        clipping True
-
-                        vbox:
-                            xsize 740
-                            xmaximum 740
-                            xfill True
-                            spacing 18
-                            if not is_character_unlocked(selected_character):
-                                text "Кейіпкер тарих өтуі барысында ашылады." style "help_body"
-                            elif selected_character == "Кенесары":
-                                text "Кенесары Қасымұлы — жай ғана көтеріліс жетекшісі емес, ол барлық үш жүздің соңғы мойындалған ханы, аңызға айналған Абылай ханның немересі және Шыңғыс ханның тікелей ұрпағы. Замандастарының көбінен айырмашылығы, Кенесары жеке пайдасын немесе уақытша одақтарды көздеген жоқ; оның басты мақсаты — Қазақ хандығының тәуелсіздігін отарлау басталғанға дейінгі шекарада қалпына келтіру болды." style "help_body"
-                                text "Оның бойында сирек кездесетін қасиеттер: дипломаттың көрегендігі мен әскери қолбасшының қатаң ерік-жігері ұштасқан. Кенесары Даладағы соғыс жүргізудің ескі әдістері империяның тұрақты әскеріне қарсы тұра алмайтынын түсінді. Сондықтан ол түбегейлі реформалар жүргізді: қатаң тәртіпке негізделген тұрақты армия құрды, оқ құю үшін көшпелі ұстаханалар ұйымдастырды, тіпті өз артиллериясын жасауға талпынды. Оны халық құрметтеді, сонымен бірге одан сескенді — Отанға опасыздық жасағаны немесе қашқындығы үшін ол тегіне қарамай өлім жазасына кесетін." style "help_body"
-                                text "1841 жылы Көкшетау өңірінде оны ресми түрде хан сайлау рәсімі өтті. Ақ киізге көтеріп хан сайлау — Кенесарының халық алдындағы жалғыз заңды билеуші екенін, ал Омбы немесе Орынбор бұйрықтарының қазақтар үшін бұдан былай күші жоқтығын білдірді. Ол Ресей императоры Николай I-мен, Хиуа және Бұхар хандықтарымен күрделі дипломатиялық қарым-қатынас жүргізіп, тек бір ғана талап қойды: қазақ жерлерін жайына қалдыру және салынған бекіністерді жою." style "help_body"
-                                text "Оның тағдыры Қазақстан тарихының ең айбынды әрі қасіретті беттерінің біріне айналды. Феодалдық топтардың бір бөлігінің сатқындығы мен екі оттың ортасында қалуы салдарынан ол 1847 жылы қаза тапты. Соңғы деміне дейін ол өз мұратына — Дала бостандығына адал болып қалды." style "help_body"
-                            elif selected_character == "Жанқожа":
-                                text "Жанқожа Нұрмұхамедұлы — аңызға айналған батыр, Шекті руының ақсақалы және Кіші жүздің ең беделді көшбасшыларының бірі. Халық жадында ол өмірін екі майдандағы толассыз арпалысқа арнаған «даланың соңғы серісі» ретінде қалды: ол солтүстіктен келген отаршылдық экспансияға да, оңтүстіктен қыспаққа алған Хиуа мен Қоқан хандықтарының озбырлығына да қарсы тұрды." style "help_body"
-                                text "Көптеген сұлтандардан айырмашылығы, Жанқожа Шыңғыс хан ұрпағына (төреге) жатпаса да, оның қарапайым халық (шаруалар) арасындағы беделі кез келген ақсүйектен жоғары болды. Ол ерен күш иесі, алып тұлға ретінде сипатталады; тіпті еңкейген кәрілік шағында да өзінің әйгілі ақ боз атына мініп, сарбаздарын шабуылға бастап шығатын. Жанқожа қатал әділдіктің символы еді: ол қазақтарға ауыр салық салған Хиуа бекіністерін аяусыз талқандады және қазақ даласын әскери бекіністер тізбегіне айналдыру әрекеттеріне батыл қарсы шықты." style "help_body"
-                                text "1840-жылдардың басында Жанқожа батырдың Кенесары көтерілісіне қосылуы ірі стратегиялық соққы болды. Бұл көтеріліс отының Сырдария жағалауынан Көкшетауға дейінгі ұлан-ғайыр аумақты шарпығанын білдірді. Жас айырмашылығы мен тегіне қарамастан, Жанқожа Кенесарыны ұлттың біртұтас көшбасшысы деп танып, оның бойынан қазақ жерлерін түпкілікті бөлшектенуден сақтап қалу мүмкіндігін көрді. Кенесары қаза тапқаннан кейін де Жанқожа күресін тоқтатпай, 1850-жылдары көтеріліс туын қайта көтерді. Ол қорлықпен бағынып күн кешкеннен гөрі, шайқас үстіндегі өлімді биік қойды." style "help_body"
-                            elif selected_character == "Ағыбай батыр":
-                                text "Ағыбай Қоңырбайұлы (1802–1885) — Кенесары хан бастаған ұлт-азаттық қозғалысының ең жақын үзеңгілестерінің бірі, даңқты қолбасшы және стратег. Шұбыртпалы руынан шыққан ол халық арасында «Ақжолтай батыр» деген құрметті есіммен танымал болды. Бұл лақап ат оның қатысқан әрбір шайқасы жеңіспен аяқталып, жолы болғыш, сәттілік әкелетін қолбасшы болғаны үшін берілген." style "help_body"
-                                text "Ағыбай батыр Кенесары әскерінің негізгі соққы беруші күшін басқарды. Ол партизандық соғыс тактикасын жетік меңгерген шебер ретінде белгілі. Оның басшылығымен жүргізілген Ақмола бекінісін алу и Ресей империясының жазалаушы отрядтарына қарсы бағытталған көптеген операциялар қазақ әскери өнерінің тарихында ерекше орын алады. Кенесары хан оның стратегиялық ойлау қабілеті мен жеке батылдығын жоғары бағалап, ең жауапты бағыттарды сеніп тапсырған." style "help_body"
-                                text "Кенесары хан қаза тапқаннан кейін де Ағыбай батыр болаттай берік рухын жоғалтқан жоқ. Ол Сырдария бойындағы Жанқожа батырмен тізе қосып, қоқандық басқыншыларға қарсы күресті жалғастырды. Өмірінің соңына дейін ел бірлігі мен жер тұтастығын қорғауды мұрат еткен батырдың тұлғасы ұрпаққа ерлік пен адалдықтың үлгісі болып қалды." style "help_body"
-                            elif selected_character == "Наурызбай":
-                                text "Наурызбай Қасымұлы — Кенесары ханның кенже інісі, аңызға айналған қолбасшы және көтерілістің басты соққы беруші күші. Халық жадында ол қазақ даласының қаймықпас ерлігі мен асқан әскери өнерінің символы — «алдаспан» болып қалды." style "help_body"
-                                text "Егер Кенесары қозғалыстың ақылы мен саяси стратегі болса, Наурызбай оның жүрегі мен ең батыл жауынгері болды. Жастайынан ол ерен физикалық күшімен және қару-жарақты шебер меңгеруімен ерекшеленді. Шайқас кезінде ол әрқашан ең қауіпті шептерде, таңдаулы жасақтардың алдында жүретін. Қарсыластың ең мықты батырларымен жекпе-жекке шығып, үнемі жеңіске жететін." style "help_body"
-                                text "Оның ағасына және тәуелсіздік идеясына деген адалдығы шексіз еді. Наурызбай бекіністерді қоршауға алу және шегіну кезіндегі қорғаныс ұрыстары сияқты ең күрделі әскери операцияларға жетекшілік етті. Оның есімі жауларына үрей ұялатып, көтерілісшілерге сенім сыйлады. Өткір ақылы мен қағылездігі оған ең тығырыққа тірелген сәттердің өзінде жол тауып шығуға мүмкіндік беретін." style "help_body"
-                            elif selected_character == "Бопай":
-                                text "Бопай ханым: Даланың қайсар ханшайымы" style "help_body"
-                                text "Бопай Қасымқызы — Кенесары ханның қарындасы, қазақ тарихындағы бірегей тұлға, дипломат және қолбасшы. Ол Кенесары бастаған ұлт-азаттық қозғалысына белсене қатысып, ерлермен иық тіресе соғысқан нағыз жауынгер әйелдің символына айналды." style "help_body"
-                                text "Бопай ханым тек ханның қарындасы ғана емес, оның ең сенімді кеңесшілерінің бірі болды. Ол 600-ден астам сарбаздан тұратын ерекше жасақты басқарды. Бұл жасақ негізінен барлау жұмыстарымен, қамтамасыз ету мәселелерімен және жазалаушы отрядтарға тұтқиылдан соққы берумен айналысты. Бопай ханымның стратегиялық ойлау қабілеті мен ұйымдастырушылық дарыны Кенесары әскерінің ішкі тәртібін нығайтуға үлкен септігін тигізді." style "help_body"
-                                text "Оның тағдыры ерік-жігердің үлгісі іспеттес. Бопай өзінің жайлы өмірін, отбасылық тыныштығын Отан азаттығы жолындағы күреске айырбастады. Ол көтеріліс кезінде ел ішіндегі бірлікті сақтау үшін дипломатиялық келіссөздер жүргізіп, ру басыларын хан маңына топтастыруға күш салды. Оның есімінен жаулары сескенетін, ал халық оны ерлігі үшін ерекше қадірледі." style "help_body"
-                                text "1847 жылы Кенесары хан мен Наурызбай батыр қаза тапқаннан кейін де, Бопай ханым күресті тоқтатқан жоқ. Ол қозғалыстың қалдықтарын біріктіруге тырысып, соңғы деміне дейін Қасым сұлтандарының асқақ рухын сақтап қалды." style "help_body"
-                            else:
-                                text "Бұл бөлім кейінірек толықтырылады." style "help_body"
+                            vbox:
+                                xsize 560
+                                xmaximum 560
+                                xfill True
+                                spacing 18
+                                if not is_character_unlocked(selected_character):
+                                    text "Кейіпкер тарих өтуі барысында ашылады." style "help_body"
+                                elif selected_character == "Кенесары":
+                                    text "Кенесары Қасымұлы — жай ғана көтеріліс жетекшісі емес, ол барлық үш жүздің соңғы мойындалған ханы, аңызға айналған Абылай ханның немересі және Шыңғыс ханның тікелей ұрпағы. Замандастарының көбінен айырмашылығы, Кенесары жеке пайдасын немесе уақытша одақтарды көздеген жоқ; оның басты мақсаты — Қазақ хандығының тәуелсіздігін отарлау басталғанға дейінгі шекарада қалпына келтіру болды." style "help_body"
+                                    text "Оның бойында сирек кездесетін қасиеттер: дипломаттың көрегендігі мен әскери қолбасшының қатаң ерік-жігері ұштасқан. Кенесары Даладағы соғыс жүргізудің ескі әдістері империяның тұрақты әскеріне қарсы тұра алмайтынын түсінді. Сондықтан ол түбегейлі реформалар жүргізді: қатаң тәртіпке негізделген тұрақты армия құрды, оқ құю үшін көшпелі ұстаханалар ұйымдастырды, тіпті өз артиллериясын жасауға талпынды. Оны халық құрметтеді, сонымен бірге одан сескенді — Отанға опасыздық жасағаны немесе қашқындығы үшін ол тегіне қарамай өлім жазасына кесетін." style "help_body"
+                                    text "1841 жылы Көкшетау өңірінде оны ресми түрде хан сайлау рәсімі өтті. Ақ киізге көтеріп хан сайлау — Кенесарының халық алдындағы жалғыз заңды билеуші екенін, ал Омбы немесе Орынбор бұйрықтарының қазақтар үшін бұдан былай күші жоқтығын білдірді. Ол Ресей императоры Николай I-мен, Хиуа және Бұхар хандықтарымен күрделі дипломатиялық қарым-қатынас жүргізіп, тек бір ғана талап қойды: қазақ жерлерін жайына қалдыру және салынған бекіністерді жою." style "help_body"
+                                    text "Оның тағдыры Қазақстан тарихының ең айбынды әрі қасіретті беттерінің біріне айналды. Феодалдық топтардың бір бөлігінің сатқындығы мен екі оттың ортасында қалуы салдарынан ол 1847 жылы қаза тапты. Соңғы деміне дейін ол өз мұратына — Дала бостандығына адал болып қалды." style "help_body"
+                                elif selected_character == "Жанқожа":
+                                    text "Жанқожа Нұрмұхамедұлы — аңызға айналған батыр, Шекті руының ақсақалы және Кіші жүздің ең беделді көшбасшыларының бірі. Халық жадында ол өмірін екі майдандағы толассыз арпалысқа арнаған «даланың соңғы серісі» ретінде қалды: ол солтүстіктен келген отаршылдық экспансияға да, оңтүстіктен қыспаққа алған Хиуа мен Қоқан хандықтарының озбырлығына да қарсы тұрды." style "help_body"
+                                    text "Көптеген сұлтандардан айырмашылығы, Жанқожа Шыңғыс хан ұрпағына (төреге) жатпаса да, оның қарапайым халық (шаруалар) арасындағы беделі кез келген ақсүйектен жоғары болды. Ол ерен күш иесі, алып тұлға ретінде сипатталады; тіпті еңкейген кәрілік шағында да өзінің әйгілі ақ боз атына мініп, сарбаздарын шабуылға бастап шығатын. Жанқожа қатал әділдіктің символы еді: ол қазақтарға ауыр салық салған Хиуа бекіністерін аяусыз талқандады және қазақ даласын әскери бекіністер тізбегіне айналдыру әрекеттеріне батыл қарсы шықты." style "help_body"
+                                    text "1840-жылдардың басында Жанқожа батырдың Кенесары көтерілісіне қосылуы ірі стратегиялық соққы болды. Бұл көтеріліс отының Сырдария жағалауынан Көкшетауға дейінгі ұлан-ғайыр аумақты шарпығанын білдірді. Жас айырмашылығы мен тегіне қарамастан, Жанқожа Кенесарыны ұлттың біртұтас көшбасшысы деп танып, оның бойынан қазақ жерлерін түпкілікті бөлшектенуден сақтап қалу мүмкіндігін көрді. Кенесары қаза тапқаннан кейін де Жанқожа күресін тоқтатпай, 1850-жылдары көтеріліс туын қайта көтерді. Ол қорлықпен бағынып күн кешкеннен гөрі, шайқас үстіндегі өлімді биік қойды." style "help_body"
+                                elif selected_character == "Ағыбай батыр":
+                                    text "Ағыбай Қоңырбайұлы (1802–1885) — Кенесары хан бастаған ұлт-азаттық қозғалысының ең жақын үзеңгілестерінің бірі, даңқты қолбасшы және стратег. Шұбыртпалы руынан шыққан ол халық арасында «Ақжолтай батыр» деген құрметті есіммен танымал болды. Бұл лақап ат оның қатысқан әрбір шайқасы жеңіспен аяқталып, жолы болғыш, сәттілік әкелетін қолбасшы болғаны үшін берілген." style "help_body"
+                                    text "Ағыбай батыр Кенесары әскерінің негізгі соққы беруші күшін басқарды. Ол партизандық соғыс тактикасын жетік меңгерген шебер ретінде белгілі. Оның басшылығымен жүргізілген Ақмола бекінісін алу и Ресей империясының жазалаушы отрядтарына қарсы бағытталған көптеген операциялар қазақ әскери өнерінің тарихында ерекше орын алады. Кенесары хан оның стратегиялық ойлау қабілеті мен жеке батылдығын жоғары бағалап, ең жауапты бағыттарды сеніп тапсырған." style "help_body"
+                                    text "Кенесары хан қаза тапқаннан кейін де Ағыбай батыр болаттай берік рухын жоғалтқан жоқ. Ол Сырдария бойындағы Жанқожа батырмен тізе қосып, қоқандық басқыншыларға қарсы күресті жалғастырды. Өмірінің соңына дейін ел бірлігі мен жер тұтастығын қорғауды мұрат еткен батырдың тұлғасы ұрпаққа ерлік пен адалдықтың үлгісі болып қалды." style "help_body"
+                                elif selected_character == "Наурызбай":
+                                    text "Наурызбай Қасымұлы — Кенесары ханның кенже інісі, аңызға айналған қолбасшы және көтерілістің басты соққы беруші күші. Халық жадында ол қазақ даласының қаймықпас ерлігі мен асқан әскери өнерінің символы — «алдаспан» болып қалды." style "help_body"
+                                    text "Егер Кенесары қозғалыстың ақылы мен саяси стратегі болса, Наурызбай оның жүрегі мен ең батыл жауынгері болды. Жастайынан ол ерен физикалық күшімен және қару-жарақты шебер меңгеруімен ерекшеленді. Шайқас кезінде ол әрқашан ең қауіпті шептерде, таңдаулы жасақтардың алдында жүретін. Қарсыластың ең мықты батырларымен жекпе-жекке шығып, үнемі жеңіске жететін." style "help_body"
+                                    text "Оның ағасына және тәуелсіздік идеясына деген адалдығы шексіз еді. Наурызбай бекіністерді қоршауға алу және шегіну кезіндегі қорғаныс ұрыстары сияқты ең күрделі әскери операцияларға жетекшілік етті. Оның есімі жауларына үрей ұялатып, көтерілісшілерге сенім сыйлады. Өткір ақылы мен қағылездігі оған ең тығырыққа тірелген сәттердің өзінде жол тауып шығуға мүмкіндік беретін." style "help_body"
+                                elif selected_character == "Бопай":
+                                    text "Бопай ханым: Даланың қайсар ханшайымы" style "help_body"
+                                    text "Бопай Қасымқызы — Кенесары ханның қарындасы, қазақ тарихындағы бірегей тұлға, дипломат және қолбасшы. Ол Кенесары бастаған ұлт-азаттық қозғалысына белсене қатысып, ерлермен иық тіресе соғысқан нағыз жауынгер әйелдің символына айналды." style "help_body"
+                                    text "Бопай ханым тек ханның қарындасы ғана емес, оның ең сенімді кеңесшілерінің бірі болды. Ол 600-ден астам сарбаздан тұратын ерекше жасақты басқарды. Бұл жасақ негізінен барлау жұмыстарымен, қамтамасыз ету мәселелерімен және жазалаушы отрядтарға тұтқиылдан соққы берумен айналысты. Бопай ханымның стратегиялық ойлау қабілеті мен ұйымдастырушылық дарыны Кенесары әскерінің ішкі тәртібін нығайтуға үлкен септігін тигізді." style "help_body"
+                                    text "Оның тағдыры ерік-жігердің үлгісі іспеттес. Бопай өзінің жайлы өмірін, отбасылық тыныштығын Отан азаттығы жолындағы күреске айырбастады. Ол көтеріліс кезінде ел ішіндегі бірлікті сақтау үшін дипломатиялық келіссөздер жүргізіп, ру басыларын хан маңына топтастыруға күш салды. Оның есімінен жаулары сескенетін, ал халық оны ерлігі үшін ерекше қадірледі." style "help_body"
+                                    text "1847 жылы Кенесары хан мен Наурызбай батыр қаза тапқаннан кейін де, Бопай ханым күресті тоқтатқан жоқ. Ол қозғалыстың қалдықтарын біріктіруге тырысып, соңғы деміне дейін Қасым сұлтандарының асқақ рухын сақтап қалды." style "help_body"
+                                else:
+                                    text "Бұл бөлім кейінірек толықтырылады." style "help_body"
 
 screen character_unlock_notification():
     zorder 200
@@ -702,6 +963,8 @@ screen preferences():
     tag menu
     layer "screens"
     
+    add "images/bg/head_menu.png" size (1920, 1080)
+
     frame:
         xalign 0.5
         yalign 0.5
@@ -769,8 +1032,20 @@ screen load():
     tag menu
     use file_slots("ОЙЫНДЫ ЖҮКТЕУ", is_load=True)
 
+# Сақтау ашылғанға дейін миниатюраны түсіру (менюсіз)
+screen pre_save_capture():
+    tag menu
+    modal True
+
+    on "show" action Hide("menu_window")
+
+    # Бір кадрдан кейін экранды түсіреміз және сақтау экранын ашамыз
+    timer 0.01 action [Function(renpy.take_screenshot), ShowMenu("save")]
+
 screen file_slots(title, is_load=False):
     layer "screens"
+    
+    add "images/bg/head_menu.png" size (1920, 1080)
     
     frame:
         xalign 0.5
@@ -781,6 +1056,8 @@ screen file_slots(title, is_load=False):
         padding (50, 40)
         
         vbox:
+            xalign 0.5
+            yalign 0.5
             spacing 24
             
             text title size 40 bold True xalign 0.5 color "#d4af37"
@@ -788,28 +1065,35 @@ screen file_slots(title, is_load=False):
             null height 10
             
             grid 3 2:
-                spacing 20
-                
-                for i in range(1, 7):
-                    button:
-                        xsize 330
-                        ysize 140
-                        background "#00000060"
-                        hover_background "#d4af3720"
-                        action (FileLoad(i) if is_load else FileSave(i))
-                        
-                        vbox:
-                            spacing 6
-                            add FileScreenshot(i) xysize (330, 90)
-                            text FileTime(i, format="%d.%m.%Y %H:%M", empty="Бос") size 16 xalign 0.5
-                            text FileSaveName(i) size 14 xalign 0.5
-            
-            hbox:
                 xalign 0.5
-                spacing 20
-                textbutton "Алдыңғы" action FilePagePrevious() style "main_menu_button"
-                textbutton "Келесі" action FilePageNext() style "main_menu_button"
+                yalign 0.5
+                xsize 1042
+                spacing 24
+                xspacing 24
+                yspacing 24
             
+                for i in range(1, 7):
+                    vbox:
+                        xsize 330
+                        xalign 0.5
+                        spacing 8
+                        
+                        button:
+                            xsize 330
+                            ysize 150
+                            background "#00000060"
+                            hover_background "#d4af3720"
+                            action (FileLoad(i) if is_load else FileSave(i))
+                            
+                            vbox:
+                                spacing 6
+                                add FileScreenshot(i) xysize (330, 90)
+                                text FileTime(i, format="%d.%m.%Y %H:%M", empty="Бос") size 16 xalign 0.5
+                                text FileSaveName(i) size 14 xalign 0.5
+                        
+                        textbutton "Өшіру" action Confirm("Сақтауды өшіргіңіз келе ме?", yes=FileDelete(i)) style "file_slot_delete_button"
+            
+            null height 6
             textbutton "Артқа" action Return() xalign 0.5 style "main_menu_button"
 
 # HUD және жылдам мәзір тек ойын кезінде көрсетіледі, басты мәзірде емес

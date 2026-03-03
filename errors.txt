@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 234: expected menuitem
-    stop sound fadeout 1.0
-    ^
+File "game/screens.rpy", line 37: u'return' is not a keyword argument or valid child for the screen statement.
+    return
+          ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sat Feb 28 11:00:36 2026
+Tue Mar  3 11:34:21 2026
